@@ -1,0 +1,23 @@
+{
+  "name": "jsconnect4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teddymannen/JSConnect4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Teddymannen/JSConnect4/issues"
+  },
+  "homepage": "https://github.com/Teddymannen/JSConnect4#readme",
+  "dependencies": {
+    "jest": "^29.6.3"
+  }
+}
