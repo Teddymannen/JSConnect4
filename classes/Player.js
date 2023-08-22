@@ -1,11 +1,6 @@
 class Player {
-  constructor(name, age) {
+  constructor(name, icon) {
     this.name = name;
-    this.age = age;
+    this.icon = icon;
   }
 }
-
-
-
-
-
