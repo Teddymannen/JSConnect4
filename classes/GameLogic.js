@@ -38,5 +38,3 @@ class GameLogic {
     return false;
   }
 }
-
-module.exports = GameLogic;
