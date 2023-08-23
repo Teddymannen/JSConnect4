@@ -18,10 +18,10 @@ class Game {
     // display the board
     this.board.display();
     console.log(`Let's begin. ${this.player1.name} goes first.`);
-    console.log('Play a piece with "game.play(0-6)"');
+    console.log('Play a piece with "game.play(1-7)"');
   }
 
   play(column) {
-    this.gameLogic.makeMove(column);
+    this.gameLogic.makeMove(column - 1);
   }
 }

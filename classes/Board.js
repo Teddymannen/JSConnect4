@@ -42,6 +42,6 @@ class Board {
       }
     }
     console.log(' ' + '-'.repeat(this.columns * 4 - 1));
-    console.log(' ' + [...Array(this.columns).keys()].map(col => ` ${col} `).join(' '));
+    console.log(' ' + [...Array(this.columns).keys()].map(col => ` ${col + 1} `).join(' '));
   }
 }
