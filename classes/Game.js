@@ -14,6 +14,7 @@ class Game {
     var player2 = prompt('Player 2, what is your name?');
     this.player1 = new Player(player1, 'X');
     this.player2 = new Player(player2, 'O');
+    this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
 
     // display the board
     this.board.display();
