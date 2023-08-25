@@ -21,7 +21,7 @@ class GameLogic {
           this.switchPlayer();
         }
       } else {
-        console.log('Invalid move. Column is full.');
+        console.log('Invalid move. Please try again.');
       }
     }
 
