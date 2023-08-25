@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player('Player 1', 'X');
     this.player2 = new Player('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
-    console.log('Start a new game with "game.start()"');
+    // console.log('Start a new game with "game.start()"');
   }
 
   start() {
@@ -19,7 +19,7 @@ class Game {
     // display the board
     this.board.display();
     console.log(`Let's begin. ${this.player1.name} goes first.`);
-    console.log('Play a piece with "game.play(1-7)"');
+    // console.log('Play a piece with "game.play(1-7)"');
   }
 
   play(column) {
