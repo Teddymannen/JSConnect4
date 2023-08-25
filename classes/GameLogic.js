@@ -23,8 +23,27 @@ class GameLogic {
       } else {
         console.log('Invalid move. Column is full.');
       }
-    } else {
-      console.log('Game over. Start a new game.');
+    }
+
+    if (this.isGameOver) {
+      // Game is over, ask to start a new game or quit
+      // Loop until valid input is received
+      while (true) {
+        const answer = prompt('Game over. Start a new game? (y/n)');
+        if (answer === 'y') {
+          window.game = new Game(6, 7);
+          window.game.start();
+          break;
+        }
+        else if (answer === 'n') {
+          console.log('Thanks for playing!');
+          break;
+        }
+        else {
+          console.log('Invalid input. Please enter "y" or "n".');
+          continue;
+        }
+      }
     }
   }
 
