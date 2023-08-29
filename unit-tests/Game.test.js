@@ -43,5 +43,5 @@ test('Check that the play() method works', () => {
     [' ---------------------------'],
     ['  1   2   3   4   5   6   7 '],
     [`It's Player 1's turn.`]
-  ])
+  ]);
 });
