@@ -21,3 +21,13 @@ test('Check that a piece can only be dropped in an empty column', () => {
   // Column is full
   expect(board.dropPiece(0, 'O')).toBe(false);
 });
+
+test('Check that the board is full', () => {
+  let board = new Board(6, 7);
+  for (let col = 0; col < board.columns; col++) {
+    for (let i = 0; i < board.rows; i++) {
+      board.dropPiece(col, 'X');
+    }
+  }
+  expect(board.isFull()).toBe(true);
+});
