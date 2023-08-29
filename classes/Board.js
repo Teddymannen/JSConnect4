@@ -15,10 +15,10 @@ class Board {
     return grid;
   }
 
-  dropPiece(column, player) {
+  dropPiece(column, playerPiece) {
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === null) {
-        this.grid[row][column] = player;
+        this.grid[row][column] = playerPiece;
         return true; // Piece successfully dropped
       }
     }
