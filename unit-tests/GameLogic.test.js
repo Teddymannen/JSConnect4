@@ -59,3 +59,23 @@ test.skip('Check that the board is full', () => {
     [`It's a draw!`]
   ]);
 });
+
+test('Check that the switchPlayer() method works', () => {
+  let game = new Game(6, 7);
+  let board = game.board;
+  let player1 = new Player('Test 1', 'X');
+  let player2 = new Player('Test 2', 'O');
+  let gameLogic = new GameLogic(player1, player2, board);
+  gameLogic.switchPlayer();
+  expect(getConsoleLogOutput()).toEqual([
+    [`It's Test 2's turn.`]
+  ]);
+  gameLogic.switchPlayer();
+  expect(getConsoleLogOutput()).toEqual([
+    [`It's Test 1's turn.`]
+  ]);
+  gameLogic.switchPlayer();
+  expect(getConsoleLogOutput()).toEqual([
+    [`It's Test 2's turn.`]
+  ]);
+});
