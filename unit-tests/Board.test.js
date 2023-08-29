@@ -1,6 +1,7 @@
 // Board tests here
 // run with "npm test"
 require('./load-all-classes.js');
+const getConsoleLogOutput = require('./capture-console-log.js');
 
 test('Check that a grid is created properly', () => {
   let board = new Board(6, 7);
@@ -30,4 +31,24 @@ test('Check that the board is full', () => {
     }
   }
   expect(board.isFull()).toBe(true);
+});
+
+test('Check that the board gets displayed', () => {
+  let board = new Board(6, 7);
+  board.display();
+  expect(getConsoleLogOutput()).toEqual([
+    ['|   |   |   |   |   |   |   |'],
+    [' ---------------------------'],
+    ['|   |   |   |   |   |   |   |'],
+    [' ---------------------------'],
+    ['|   |   |   |   |   |   |   |'],
+    [' ---------------------------'],
+    ['|   |   |   |   |   |   |   |'],
+    [' ---------------------------'],
+    ['|   |   |   |   |   |   |   |'],
+    [' ---------------------------'],
+    ['|   |   |   |   |   |   |   |'],
+    [' ---------------------------'],
+    ['  1   2   3   4   5   6   7 ']
+  ])
 });
