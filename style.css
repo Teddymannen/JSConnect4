@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #d1d1d1;
+}
+
+body {
+    margin: 0;
+    font-family: 'Ubuntu Mono';
+}
+
+.board {
+    margin-top: calc(50vh - 35vh);
+    margin-left: calc(50vw - 45vh);
+    width: 70vh;
+    height: 60vh;
+    background-color: #999;
+    float: left;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.board td {
+    border: 1px solid #fff;
+    text-align: center;
+    font-size: calc(70vh / 5);
+    color: white;
+    background-color: rgb(90, 90, 90);
+    width: calc(70vh / 7);
+    height: calc(60vh / 6);
+}
+
+/* .board tr:nth-child(even) td:nth-child(odd) {
+    background-color: rgb(0, 0, 0);
+}
+
+.board tr:nth-child(odd) td:nth-child(even) {
+    background-color: rgb(0, 0, 0);
+} */
+
+.info {
+    /*background-color: #ddd;*/
+    margin-top: calc(50vh - 35vh);
+    padding-left: 40px;
+    width: 20vh;
+    float: left;
+    padding-left: 20px;
+}
+
+p {
+    text-align: center;
+    margin-top: 0;
+}
+
+.yellow {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 72);
+}
+
+.red {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    border-radius: 50%;
+    background-color: rgb(255, 57, 57);
+}
+
+@media (orientation: portrait) {
+    .board {
+        margin-top: calc(50vh - 48vw);
+        margin-left: calc(50vw - 40vw);
+        width: 80vw;
+        height: 70vw;
+        float: none;
+    }
+
+    .info {
+        margin-top: 0;
+        margin-left: calc(50vw - 40vw);
+        height: 16vw;
+        width: 80vw;
+        height: inherit;
+        float: none;
+        padding-left: 0;
+        padding-top: 10px;
+    }
+
+    .board td {
+        width: calc(80vw / 7);
+        height: calc(70vw / 6);
+    }
+}
