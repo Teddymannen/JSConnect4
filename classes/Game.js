@@ -5,7 +5,7 @@ class Game {
     this.player2 = new Player('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
     // console.log('Start a new game with "game.start()"');
-    this.info = "Test";
+    this.info = "";
   }
 
   start() {
@@ -34,6 +34,6 @@ class Game {
 
   play(column) {
     this.gameLogic.makeMove(column - 1);
-    this.render(this.info);
+    this.render(this.gameLogic.info);
   }
 }
