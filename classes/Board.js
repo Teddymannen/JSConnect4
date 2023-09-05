@@ -9,15 +9,38 @@ class Board {
     const grid = new Array(this.rows);
 
     for (let i = 0; i < this.rows; i++) {
-      grid[i] = new Array(this.columns).fill(null);
+      grid[i] = new Array(this.columns).fill('');
     }
 
     return grid;
   }
 
+  // getCellsReplaceWithEmpty() {
+  //   let allTd = [...document.querySelectorAll('td')];
+  //   let cellsReplaceWithEmpty = [];
+  //   allTd.forEach((td, index) => {
+  //     if (td.innerText === 'X' || td.innerText === 'O') {
+  //       cellsReplaceWithEmpty.push(index);
+  //     }
+  //   });
+  //   return cellsReplaceWithEmpty;
+  // }
+
+  render() {
+    return /*html*/`
+      <table class="board">
+        ${this.grid.map(row => `<tr>${row.map(cell => `
+          <td>
+            ${cell}
+          </td>
+        `).join('')}</tr>`).join('')}
+      </table>
+    `;
+  }
+
   dropPiece(column, playerPiece) {
     for (let row = this.rows - 1; row >= 0; row--) {
-      if (this.grid[row][column] === null) {
+      if (this.grid[row][column] === '') {
         this.grid[row][column] = playerPiece;
         return true; // Piece successfully dropped
       }
@@ -26,7 +49,7 @@ class Board {
   }
 
   isFull() {
-    return this.grid.every(row => row.every(cell => cell !== null));
+    return this.grid.every(row => row.every(cell => cell !== ''));
   }
 
   display() {
@@ -34,7 +57,7 @@ class Board {
       let rowStr = '|';
       for (let col = 0; col < this.columns; col++) {
         const piece = this.grid[row][col];
-        rowStr += ` ${piece !== null ? piece : ' '} |`;
+        rowStr += ` ${piece !== '' ? piece : ' '} |`;
       }
       console.log(rowStr);
       if (row < this.rows - 1) {
