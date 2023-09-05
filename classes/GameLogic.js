@@ -4,6 +4,7 @@ class GameLogic {
     this.currentPlayerIndex = 0;
     this.board = board;
     this.isGameOver = false;
+    this.info = "";
   }
 
   makeMove(column) {
@@ -12,16 +13,21 @@ class GameLogic {
       if (this.board.dropPiece(column, currentPlayer.symbol)) {
         this.board.display();
         if (this.checkForWin(currentPlayer)) {
-          console.log(`${currentPlayer.name} wins!`);
+          // console.log(`${currentPlayer.name} wins!`);
+          this.info = `${currentPlayer.name} wins!`;
           this.isGameOver = true;
         } else if (this.board.isFull()) {
-          console.log("It's a draw!");
+          // console.log("It's a draw!");
+          this.info = "It's a draw!";
           this.isGameOver = true;
         } else {
           this.switchPlayer();
+          // console.log(`It's ${this.players[this.currentPlayerIndex].name}'s turn.`);
+          this.info = `It's ${this.players[this.currentPlayerIndex].name}'s turn.`;
         }
       } else {
-        console.log('Invalid move. Please try again.');
+        // console.log('Invalid move. Please try again.');
+        this.info = 'Invalid move. Please try again.';
       }
     }
 
@@ -36,11 +42,13 @@ class GameLogic {
           break;
         }
         else if (answer === 'n') {
-          console.log('Thanks for playing!');
+          // console.log('Thanks for playing!');
+          this.info += '<br>' + 'Thanks for playing!';
           break;
         }
         else {
           console.log('Invalid input. Please enter "y" or "n".');
+          // this.info = 'Invalid input. Please enter "y" or "n".';
           continue;
         }
       }
@@ -49,7 +57,6 @@ class GameLogic {
 
   switchPlayer() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % 2;
-    console.log(`It's ${this.players[this.currentPlayerIndex].name}'s turn.`);
   }
 
   checkForWin(player) {
