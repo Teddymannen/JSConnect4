@@ -2,6 +2,7 @@ class GameLogic {
   constructor(player1, player2, board) {
     this.players = [player1, player2];
     this.currentPlayerIndex = 0;
+    // this.currentPlayer = this.players[this.currentPlayerIndex]; 
     this.board = board;
     this.isGameOver = false;
     this.info = "";
@@ -22,7 +23,6 @@ class GameLogic {
           this.isGameOver = true;
         } else {
           this.switchPlayer();
-          // console.log(`It's ${this.players[this.currentPlayerIndex].name}'s turn.`);
           this.info = `It's ${this.players[this.currentPlayerIndex].name}'s turn.`;
         }
       } else {
