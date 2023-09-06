@@ -25,6 +25,12 @@ class Game {
     this.render(this.info);
   }
 
+  // startWithPlayers(player1, player2) {
+  //   this.player1 = player1;
+  //   this.player2 = player2;
+  //   this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+  // }
+
   render(info) {
     document.body.innerHTML = `
       ${this.board.render()}
