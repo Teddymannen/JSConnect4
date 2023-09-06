@@ -25,21 +25,37 @@ class Game {
     this.render(this.info);
   }
 
-  // startWithPlayers(player1, player2) {
-  //   this.player1 = player1;
-  //   this.player2 = player2;
-  //   this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
-  // }
+  startWithPlayers(player1, player2) {
+    new Game(6, 7);
+    this.player1 = player1;
+    this.player2 = player2;
+    this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+
+    // display the board
+    this.board.display();
+    // console.log(`Let's begin. ${this.player1.name} goes first.`);
+    this.info = `Let's begin. ${this.player1.name} goes first.`;
+    // console.log('Play a piece with "game.play(1-7)"');
+    this.render(this.info);
+  }
 
   render(info) {
-    document.body.innerHTML = `
+    document.body.innerHTML = /*html*/`
       ${this.board.render()}
       <div class="info">${info}</div>
+    `;
+  }
+
+  formRender(form) {
+    document.body.innerHTML = /*html*/`
+      ${this.board.render()}
+      ${form}
     `;
   }
 
   play(column) {
     this.gameLogic.makeMove(column - 1);
     this.render(this.gameLogic.info);
+    this.render(this.gameLogic.form);
   }
 }
