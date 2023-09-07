@@ -5,6 +5,7 @@ class GameLogic {
     this.board = board;
     this.isGameOver = false;
     this.info = "";
+    this.form = "";
   }
 
   makeMove(column) {
@@ -32,16 +33,15 @@ class GameLogic {
     }
 
     if (this.isGameOver) {
-      // define the game object
 
-
-      this.info =
+      this.info += "<br>" +
+        "<br>" +
         "Game Over! <br>" +
         "Do you want to play again? <br>" +
         "Click the button below to start a new game.";
 
       this.form = /*html*/`
-        <form onsubmit="return game.startWithPlayers(player1, player2)" method="POST">
+        <form onsubmit="game.startWithPlayers()"> 
           <button type="submit">New Game</button>
         </form>
       `;
