@@ -33,7 +33,6 @@ class GameLogic {
     }
 
     if (this.isGameOver) {
-
       this.info += "<br>" +
         "<br>" +
         "Game Over! <br>" +
@@ -41,11 +40,15 @@ class GameLogic {
         "Click the button below to start a new game.";
 
       this.form = /*html*/`
-        <form onsubmit="game.startWithPlayers()"> 
+      <div class="form">
+        <form onsubmit="game.startWithPlayers()">
+          <button type="submit">Same players</button>
+        </form>
+        <form onsubmit="game.start()">
           <button type="submit">New Game</button>
         </form>
+      </div>
       `;
-
     }
   }
 
