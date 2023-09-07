@@ -2,7 +2,6 @@ class GameLogic {
   constructor(player1, player2, board) {
     this.players = [player1, player2];
     this.currentPlayerIndex = 0;
-    // this.currentPlayer = this.players[this.currentPlayerIndex]; 
     this.board = board;
     this.isGameOver = false;
     this.info = "";
@@ -11,6 +10,7 @@ class GameLogic {
   makeMove(column) {
     if (!this.isGameOver) {
       const currentPlayer = this.players[this.currentPlayerIndex];
+      this.currentPlayer = currentPlayer
       if (this.board.dropPiece(column, currentPlayer.symbol)) {
         this.board.display();
         if (this.checkForWin(currentPlayer)) {
@@ -57,6 +57,7 @@ class GameLogic {
 
   switchPlayer() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % 2;
+    console.log("ThisCurrentPlayer ", this.currentPlayerIndex);
   }
 
   checkForWin(player) {
