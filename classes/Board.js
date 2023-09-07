@@ -30,13 +30,29 @@ class Board {
     return /*html*/`
       <table class="board">
         ${this.grid.map(row => `<tr>${row.map(cell => `
-          <td>
-            ${cell}
+          <td class="${cell === 'X' ? 'yellow' : ''} ${cell === 'O' ? 'red' : ''}">
+
           </td>
         `).join('')}</tr>`).join('')}
       </table>
     `;
   }
+  // q: can I add an if statement to add a class to the td, depending on the value of the cell?
+  // a: yes, but you need to add a class to the cell in the first place
+  // q: how would that look? 
+  // a: 
+  // render() {
+  //   return /*html*/`
+  //     <table class="board">
+  //       ${this.grid.map(row => `<tr>${row.map(cell => `
+  //         <td class="${cell === 'X' ? 'player1' : 'player2'}">
+  //           ${cell}
+  //         </td>
+  //       `).join('')}</tr>`).join('')}
+  //     </table>
+  //   `;
+  // }
+
 
   dropPiece(column, playerPiece) {
     for (let row = this.rows - 1; row >= 0; row--) {

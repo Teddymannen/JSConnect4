@@ -33,11 +33,17 @@ class GameLogic {
     }
 
     if (this.isGameOver) {
-      this.info += "<br>" +
-        "<br>" +
-        "Game Over! <br>" +
-        "Do you want to play again? <br>" +
-        "Click the button below to start a new game.";
+      if (!this.board.isFull()) {
+        this.info = `
+        ${this.currentPlayer.name} wins! <br>
+        <br>
+        Game Over!`;
+      } else {
+        this.info = `
+        It's a draw! <br>
+        <br>
+        Game Over!`;
+      }
 
       this.form = /*html*/`
       <div class="form">

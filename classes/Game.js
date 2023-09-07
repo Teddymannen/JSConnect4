@@ -45,6 +45,7 @@ class Game {
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
     this.render(this.info, this.form);
+    this.addEventListeners();
   }
 
   render(info, form) {
