@@ -6,9 +6,12 @@ class Game {
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
     // console.log('Start a new game with "game.start()"');
     this.info = "";
+    this.form = "";
   }
 
   start() {
+    // clear the board
+    this.board = new Board(this.board.rows, this.board.columns);
     console.log('Welcome to Connect Four!');
     // prompt for player names
     var player1 = prompt('Player 1, what is your name?');
@@ -22,27 +25,31 @@ class Game {
     // console.log(`Let's begin. ${this.player1.name} goes first.`);
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
-    this.render(this.info);
+    this.render(this.info, this.form);
   }
 
-  startWithPlayers(player1, player2) {
-    new Game(6, 7);
-    this.player1 = player1;
-    this.player2 = player2;
+  startWithPlayers() {
+    // clear the board
+    this.board = new Board(this.board.rows, this.board.columns);
+    console.log('Welcome to Connect Four!');
+    // this.player1 = new Player(this.player1.name, 'X');
+    // this.player2 = new Player(this.player2.name, 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+    prompt('ready?')
 
     // display the board
     this.board.display();
     // console.log(`Let's begin. ${this.player1.name} goes first.`);
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
-    this.render(this.info);
+    this.render(this.info, this.form);
   }
 
-  render(info) {
+  render(info, form) {
     document.body.innerHTML = /*html*/`
       ${this.board.render()}
       <div class="info">${info}</div>
+      ${form}
     `;
   }
 
@@ -55,7 +62,6 @@ class Game {
 
   play(column) {
     this.gameLogic.makeMove(column - 1);
-    this.render(this.gameLogic.info);
-    this.render(this.gameLogic.form);
+    this.render(this.gameLogic.info, this.gameLogic.form);
   }
 }
