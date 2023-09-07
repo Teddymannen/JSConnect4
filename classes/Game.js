@@ -35,7 +35,7 @@ class Game {
     // this.player1 = new Player(this.player1.name, 'X');
     // this.player2 = new Player(this.player2.name, 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
-    prompt('ready?')
+    // prompt('ready?')
 
     // display the board
     this.board.display();
@@ -49,13 +49,6 @@ class Game {
     document.body.innerHTML = /*html*/`
       ${this.board.render()}
       <div class="info">${info}</div>
-      ${form}
-    `;
-  }
-
-  formRender(form) {
-    document.body.innerHTML = /*html*/`
-      ${this.board.render()}
       ${form}
     `;
   }
