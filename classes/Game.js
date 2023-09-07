@@ -69,7 +69,6 @@ class Game {
               this.gameLogic.makeMove(column);
               // Update grid with new "tile"
               this.board.grid[row][column] = this.gameLogic.currentPlayer.symbol;
-              this.gameLogic.switchPlayer();
               // Stop searching when empty cell is found
               break;
             }
