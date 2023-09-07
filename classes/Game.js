@@ -47,34 +47,30 @@ class Game {
       td.addEventListener('click', () => {
         console.log('click');
 
-        if (!this.board.isFull()) {
-          let column = index % 7;
-          
-          // To find nearest empty cell/td from the board.
-          for (let row = this.board.rows - 1; row >= 0; row--) {
-            // Calculate index (0-41)
-            const findIndex = row * 7 + column;
-            // To reach the specific <td> in HTML (squares on the board) 
-            // with the index, ie fetch the n:th index from tdAll
-            const cell = tdAll[findIndex];
+        let column = index % 7;
 
-            if (!cell.classList.contains('yellow') && !cell.classList.contains('red')) {
+        // To find nearest empty cell/td from the board.
+        for (let row = this.board.rows - 1; row >= 0; row--) {
+          // Calculate index (0-41)
+          const findIndex = row * 7 + column;
+          // To reach the specific <td> in HTML (squares on the board) 
+          // with the index, ie fetch the n:th index from tdAll
+          const cell = tdAll[findIndex];
 
-              // Change colour for current player
-              if (this.gameLogic.currentPlayerIndex === 0) {
-                cell.classList.add('yellow');
-              } else {
-                cell.classList.add('red');
-              }
-              this.gameLogic.makeMove(column);
-              // Update grid with new "tile"
-              this.board.grid[row][column] = this.gameLogic.currentPlayer.symbol;
-              // Stop searching when empty cell is found
-              break;
+          if (!cell.classList.contains('yellow') && !cell.classList.contains('red')) {
+
+            // Change colour for current player
+            if (this.gameLogic.currentPlayerIndex === 0) {
+              cell.classList.add('yellow');
+            } else {
+              cell.classList.add('red');
             }
+            this.gameLogic.makeMove(column);
+            // Update grid with new "tile"
+            this.board.grid[row][column] = this.gameLogic.currentPlayer.symbol;
+            // Stop searching when empty cell is found
+            break;
           }
-        } else {
-          alert('This column is full. Please choose another column.');
         }
       });
     });
