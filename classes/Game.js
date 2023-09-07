@@ -26,7 +26,7 @@ class Game {
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
     this.render(this.info, this.form);
-
+    // Add eventListener to click on columns
     this.addEventListeners();
   }
 
@@ -45,7 +45,6 @@ class Game {
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
     this.render(this.info, this.form);
-    // Add eventListener to click on columns
   }
 
   render(info, form) {
@@ -59,6 +58,7 @@ class Game {
   play(column) {
     this.gameLogic.makeMove(column - 1);
     this.render(this.gameLogic.info, this.gameLogic.form);
+    this.addEventListeners();
   }
 
   addEventListeners() {
@@ -87,9 +87,10 @@ class Game {
             } else {
               cell.classList.add('red');
             }
-            this.gameLogic.makeMove(column);
+            // this.gameLogic.makeMove(column);
+            this.play(column + 1);
             // Update grid with new "tile"
-            this.board.grid[row][column] = this.gameLogic.currentPlayer.symbol;
+            // this.board.grid[row][column] = this.gameLogic.currentPlayer.symbol;
             // Stop searching when empty cell is found
             break;
           }
