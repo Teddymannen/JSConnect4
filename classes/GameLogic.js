@@ -11,6 +11,7 @@ class GameLogic {
   makeMove(column) {
     if (!this.isGameOver) {
       const currentPlayer = this.players[this.currentPlayerIndex];
+      this.currentPlayer = currentPlayer
       if (this.board.dropPiece(column, currentPlayer.symbol)) {
         this.board.display();
         if (this.checkForWin(currentPlayer)) {
@@ -23,7 +24,6 @@ class GameLogic {
           this.isGameOver = true;
         } else {
           this.switchPlayer();
-          // console.log(`It's ${this.players[this.currentPlayerIndex].name}'s turn.`);
           this.info = `It's ${this.players[this.currentPlayerIndex].name}'s turn.`;
         }
       } else {
@@ -54,6 +54,7 @@ class GameLogic {
 
   switchPlayer() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % 2;
+    console.log("ThisCurrentPlayer ", this.currentPlayerIndex);
   }
 
   checkForWin(player) {

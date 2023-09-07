@@ -26,6 +26,8 @@ class Game {
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
     this.render(this.info, this.form);
+
+    this.addEventListeners();
   }
 
   startWithPlayers() {
@@ -43,6 +45,7 @@ class Game {
     this.info = `Let's begin. ${this.player1.name} goes first.`;
     // console.log('Play a piece with "game.play(1-7)"');
     this.render(this.info, this.form);
+    // Add eventListener to click on columns
   }
 
   render(info, form) {
@@ -57,4 +60,42 @@ class Game {
     this.gameLogic.makeMove(column - 1);
     this.render(this.gameLogic.info, this.gameLogic.form);
   }
+
+  addEventListeners() {
+    let tdAll = document.querySelectorAll('td');
+    console.log(tdAll);
+    // Add event listener for each column
+    tdAll.forEach((td, index) => {
+      td.addEventListener('click', () => {
+        console.log('click');
+
+        let column = index % 7;
+
+        // To find nearest empty cell/td from the board.
+        for (let row = this.board.rows - 1; row >= 0; row--) {
+          // Calculate index (0-41)
+          const findIndex = row * 7 + column;
+          // To reach the specific <td> in HTML (squares on the board) 
+          // with the index, ie fetch the n:th index from tdAll
+          const cell = tdAll[findIndex];
+
+          if (!cell.classList.contains('yellow') && !cell.classList.contains('red')) {
+
+            // Change colour for current player
+            if (this.gameLogic.currentPlayerIndex === 0) {
+              cell.classList.add('yellow');
+            } else {
+              cell.classList.add('red');
+            }
+            this.gameLogic.makeMove(column);
+            // Update grid with new "tile"
+            this.board.grid[row][column] = this.gameLogic.currentPlayer.symbol;
+            // Stop searching when empty cell is found
+            break;
+          }
+        }
+      });
+    });
+  }
+
 }
