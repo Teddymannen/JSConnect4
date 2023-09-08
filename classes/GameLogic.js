@@ -35,14 +35,12 @@ class GameLogic {
     if (this.isGameOver) {
       if (!this.board.isFull()) {
         this.info = `
-        ${this.currentPlayer.name} wins! <br>
-        <br>
-        Game Over!`;
+        <p class="pClass">${this.currentPlayer.name} wins! </p>
+        <p>Game Over!</p>`;
       } else {
         this.info = `
-        It's a draw! <br>
-        <br>
-        Game Over!`;
+        <p>It's a draw!</p>
+        <p>Game Over!</p>`;
       }
 
       this.form = /*html*/`
@@ -50,7 +48,7 @@ class GameLogic {
         <form onsubmit="game.startWithPlayers()">
           <button type="submit">Same players</button>
         </form>
-        <form onsubmit="game.start()">
+        <form onsubmit="game.startRender()">
           <button type="submit">New Game</button>
         </form>
       </div>
