@@ -5,30 +5,32 @@ class Game {
     this.player2 = new Player('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
     // console.log('Start a new game with "game.start()"');
+    this.addEventHandlerForSubmitNames();
     this.info = "";
     this.form = "";
   }
 
-  start() {
-    // clear the board
-    this.board = new Board(this.board.rows, this.board.columns);
-    console.log('Welcome to Connect Four!');
-    // prompt for player names
-    var player1 = prompt('Player 1, what is your name?');
-    var player2 = prompt('Player 2, what is your name?');
-    this.player1 = new Player(player1, 'X');
-    this.player2 = new Player(player2, 'O');
-    this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+  // start() {
+  //   // clear the board
+  //   this.board = new Board(this.board.rows, this.board.columns);
+  //   console.log('Welcome to Connect Four!');
+  //   // prompt for player names
+  //   // var player1 = prompt('Player 1, what is your name?');
+  //   // var player2 = prompt('Player 2, what is your name?');
+  //   // this.player1 = new Player(player1, 'X');
+  //   // this.player2 = new Player(player2, 'O');
 
-    // display the board
-    this.board.display();
-    // console.log(`Let's begin. ${this.player1.name} goes first.`);
-    this.info = `Let's begin. ${this.player1.name} goes first.`;
-    // console.log('Play a piece with "game.play(1-7)"');
-    this.render(this.info, this.form);
-    // Add eventListener to click on columns
-    this.addEventListeners();
-  }
+  //   this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+
+  //   // display the board
+  //   this.board.display();
+  //   // console.log(`Let's begin. ${this.player1.name} goes first.`);
+  //   this.info = `Let's begin. ${this.player1.name} goes first.`;
+  //   // console.log('Play a piece with "game.play(1-7)"');
+  //   this.render(this.info, this.form);
+  //   // Add eventListener to click on columns
+  //   this.addEventListeners();
+  // }
 
   startWithPlayers() {
     // clear the board
@@ -48,11 +50,28 @@ class Game {
     this.addEventListeners();
   }
 
+  startRender() {
+    this.board = new Board(this.board.rows, this.board.columns);
+    document.body.innerHTML = /*html*/`
+      ${this.board.render()}
+      <div class="info">
+        <form class="save-name-form">
+          <label>Player 1: <input placeholder="Player 1" required></label>
+          <label>Player 2: <input placeholder="Player 2" required></label>
+          <button type="submit">Play!</button>
+        </form>
+      </div>
+    `;
+  }
+
   render(info, form) {
     document.body.innerHTML = /*html*/`
       ${this.board.render()}
-      <div class="info">${info}</div>
-      ${form}
+      <div class="info">
+        ${info}
+        ${form}
+      </div>
+      
     `;
   }
 
@@ -100,4 +119,24 @@ class Game {
     });
   }
 
+  addEventHandlerForSubmitNames() {
+    // Create a submit handler function if it does not exist
+    this.nameSubmitHandler = this.nameSubmitHandler || (event => {
+      let saveNameForm = event.target.closest('.save-name-form');
+      // only do something if we submit the save-name-form
+      if (saveNameForm) {
+        event.preventDefault(); // do not reload web page
+
+        var player1 = saveNameForm.elements[0].value;
+        var player2 = saveNameForm.elements[1].value;
+        this.player1 = new Player(player1, 'X');
+        this.player2 = new Player(player2, 'O');
+        this.startWithPlayers();
+      }
+    });
+    // Remove submit handler (so we can never have double submit handlers)
+    document.body.removeEventListener('submit', this.nameSubmitHandler);
+    // Add submit handler
+    document.body.addEventListener('submit', this.nameSubmitHandler);
+  }
 }
