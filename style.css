@@ -36,16 +36,8 @@ body {
     height: calc(60vh / 6);
 }
 
-/* .board tr:nth-child(even) td:nth-child(odd) {
-    background-color: rgb(0, 0, 0);
-}
-
-.board tr:nth-child(odd) td:nth-child(even) {
-    background-color: rgb(0, 0, 0);
-} */
-
 .info {
-    /*background-color: #ddd;*/
+    background-color: #6e6e6e;
     margin-top: calc(50vh - 35vh);
     padding-left: 40px;
     width: 20vh;
@@ -56,6 +48,11 @@ body {
 p {
     text-align: center;
     margin-top: 0;
+}
+
+.pClass {
+    /* I want to change the color of the text in the p tag */
+    color: #00f7ff;
 }
 
 .yellow {
