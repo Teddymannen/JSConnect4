@@ -57,7 +57,6 @@ class GameLogic {
 
   switchPlayer() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % 2;
-    console.log("ThisCurrentPlayer ", this.currentPlayerIndex);
   }
 
   checkForWin(player) {
