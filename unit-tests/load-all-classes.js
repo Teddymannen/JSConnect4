@@ -1,3 +1,13 @@
+// Load the jsdom library (a mock DOM/browser environment)
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+// Mock window and document objects of the DOM
+const { window } = new JSDOM(`...`);
+const { document } = (new JSDOM(`...`)).window;
+// Make window and document available for the program code
+globalThis.window = window;
+globalThis.document = document;
+
 // fs -> node.js library to handle the file system
 let fs = require('fs');
 // path -> node.js library to handle file paths

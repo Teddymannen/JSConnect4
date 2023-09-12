@@ -1,23 +1,30 @@
 {
-  "name": "jsconnect4",
+  "name": "jest-intro",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test-jest": "jest",
+    "test-ui": "cypress open --browser chrome",
+    "test": "cypress run --browser chrome",
+    "make-steps": "node _auto-generate-step-definitions.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Teddymannen/JSConnect4.git"
+  "cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true
+    },
+    "stepDefinitions": [
+      "/specs/step_definitions/**/*.js"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Teddymannen/JSConnect4/issues"
-  },
-  "homepage": "https://github.com/Teddymannen/JSConnect4#readme",
-  "dependencies": {
-    "jest": "^29.6.3"
+  "description": "",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "12.2",
+    "@cypress/webpack-preprocessor": "5.12",
+    "cypress": "10.7",
+    "jest": "^29.6.2",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }
