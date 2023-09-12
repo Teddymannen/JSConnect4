@@ -15,17 +15,6 @@ class Board {
     return grid;
   }
 
-  // getCellsReplaceWithEmpty() {
-  //   let allTd = [...document.querySelectorAll('td')];
-  //   let cellsReplaceWithEmpty = [];
-  //   allTd.forEach((td, index) => {
-  //     if (td.innerText === 'X' || td.innerText === 'O') {
-  //       cellsReplaceWithEmpty.push(index);
-  //     }
-  //   });
-  //   return cellsReplaceWithEmpty;
-  // }
-
   render() {
     return /*html*/`
       <table class="board">
@@ -36,28 +25,12 @@ class Board {
       </table>
     `;
   }
-  // q: can I add an if statement to add a class to the td, depending on the value of the cell?
-  // a: yes, but you need to add a class to the cell in the first place
-  // q: how would that look? 
-  // a: 
-  // render() {
-  //   return /*html*/`
-  //     <table class="board">
-  //       ${this.grid.map(row => `<tr>${row.map(cell => `
-  //         <td class="${cell === 'X' ? 'player1' : 'player2'}">
-  //           ${cell}
-  //         </td>
-  //       `).join('')}</tr>`).join('')}
-  //     </table>
-  //   `;
-  // }
-
 
   dropPiece(column, playerPiece) {
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === '') {
         this.grid[row][column] = playerPiece;
-        window.moveHistory.push(column)
+        // window.moveHistory.push(column)
         return true; // Piece successfully dropped
       }
     }
