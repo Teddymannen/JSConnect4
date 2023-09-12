@@ -44,7 +44,7 @@ class Game {
     // display the board
     this.board.display();
     // console.log(`Let's begin. ${this.player1.name} goes first.`);
-    this.info = `Let's begin. ${this.player1.name} goes first.`;
+    this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
     // console.log('Play a piece with "game.play(1-7)"');
     this.render(this.info, this.form);
     this.addEventListeners();
@@ -53,6 +53,7 @@ class Game {
   startRender() {
     this.board = new Board(this.board.rows, this.board.columns);
     document.body.innerHTML = /*html*/`
+      <h1 id="mainHeader">Connect Four</h1>
       ${this.board.render()}
       <div class="info">
         <form class="save-name-form">
@@ -60,16 +61,33 @@ class Game {
           <label>Player 2: <input placeholder="Player 2" required></label>
           <button type="submit">Play!</button>
         </form>
+        <div class="rules">
+          <h2>Rules:</h2>
+          <p>Player 1 is yellow</p>
+          <p>Player 2 is red</p>
+          <p>Players take turns dropping a piece of their colour into a column.</p>
+          <p>The piece falls to the lowest available square in the column.</p>
+          <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
+        </div>
       </div>
     `;
   }
 
   render(info, form) {
     document.body.innerHTML = /*html*/`
+      <h1 id="mainHeader">Connect Four</h1>
       ${this.board.render()}
       <div class="info">
         ${info}
         ${form}
+        <div class="rules">
+          <h2>Rules:</h2>
+          <p>Player 1 is yellow</p>
+          <p>Player 2 is red</p>
+          <p>Players take turns dropping a piece of their colour into a column.</p>
+          <p>The piece falls to the lowest available square in the column.</p>
+          <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
+        </div>
       </div>
       
     `;
