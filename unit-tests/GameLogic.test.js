@@ -90,15 +90,7 @@ test.skip('Check that method checkForWin() for horizontal win work ', () => {
   let gameLogic = new GameLogic(player1, player2, board);
 
   // Ugly solution below :c
-  gameLogic.makeMove(0);
-  gameLogic.makeMove(0);
-  gameLogic.makeMove(1);
-  gameLogic.makeMove(1);
-  gameLogic.makeMove(2);
-  gameLogic.makeMove(2);
-  gameLogic.makeMove(3);
-  gameLogic.makeMove(3);
-  gameLogic.makeMove(4);
+  [0, 0, 1, 1, 2, 2, 3, 3, 4].forEach(col => gameLogic.makeMove(col));
   expect(getConsoleLogOutput()).toEqual([
     ['|   |   |   |   |   |   |   |'],
     [' ---------------------------'],
