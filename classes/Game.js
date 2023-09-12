@@ -8,6 +8,7 @@ class Game {
     this.addEventHandlerForSubmitNames();
     this.info = "";
     this.form = "";
+    this.startRender();
   }
 
   // start() {
