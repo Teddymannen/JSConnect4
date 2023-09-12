@@ -16,7 +16,7 @@ body {
 }
 
 .board {
-    margin-top: calc(50vh - 35vh);
+    /* margin-top: calc(50vh - 35vh); */
     margin-left: calc(50vw - 45vh);
     width: 70vh;
     height: 60vh;
@@ -37,9 +37,19 @@ body {
     height: calc(60vh / 6);
 }
 
+#mainHeader {
+    text-align: center;
+    margin-top: calc(50vh - 35vh);
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(0, 0, 0);
+    /* float: center; */
+}
+
 .info {
     background-color: rgb(110, 110, 110);
-    margin-top: calc(50vh - 35vh);
+    /* margin-top: calc(50vh - 35vh); */
     padding-left: 40px;
     width: 20vh;
     height: 60vh;
@@ -55,6 +65,14 @@ p {
 .pClass {
     /* I want to change the color of the text in the p tag */
     color: rgb(0, 247, 255);
+}
+
+.yellowP {
+    color: rgb(255, 255, 72);
+}
+
+.redP {
+    color: rgb(255, 57, 57);
 }
 
 .empty {
@@ -83,11 +101,15 @@ p {
 
 @media (orientation: portrait) {
     .board {
-        margin-top: calc(50vh - 48vw);
+        /* margin-top: calc(50vh - 48vw); */
         margin-left: calc(50vw - 40vw);
         width: 80vw;
         height: 70vw;
         float: none;
+    }
+
+    #mainHeader {
+        margin-top: calc(50vh - 48vh);
     }
 
     .info {
