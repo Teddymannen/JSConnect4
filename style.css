@@ -7,7 +7,7 @@
 }
 
 html {
-    background-color: #d1d1d1;
+    background-color: rgb(209, 209, 209);
 }
 
 body {
@@ -16,52 +16,103 @@ body {
 }
 
 .board {
-    margin-top: calc(50vh - 35vh);
+    /* margin-top: calc(50vh - 35vh); */
     margin-left: calc(50vw - 45vh);
     width: 70vh;
     height: 60vh;
-    background-color: #0c0592;
+    background-color: rgb(4, 0, 219);
     float: left;
     border-spacing: 0;
-    border-collapse: collapse;
-
+    /* border-collapse: collapse; */
+    border-collapse: separate;
 }
 
 .board td {
-    border: 1px solid #0f0133;
+    border: 1vh solid rgb(14, 0, 136);
+    border-radius: 50%;
     text-align: center;
     font-size: calc(70vh / 9);
-    color: white;
-    /* background-color: rgb(90, 90, 90); */
+    /* color: rgb(6, 173, 81); */
     width: calc(70vh / 7);
     height: calc(60vh / 6);
+}
 
+.mainHeader {
+    text-align: center;
+    margin-top: calc(50vh - 35vh);
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(0, 0, 0);
+    /* float: center; */
+}
+
+.rules {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(0, 0, 0);
+    /* float: center; */
 }
 
 .info {
-    background-color: #6e6e6e;
-    margin-top: calc(50vh - 35vh);
-    padding-left: 40px;
-    width: 40vh;
+    background-color: rgb(0, 0, 0);
+    /* margin-top: calc(50vh - 35vh); */
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    width: 20vh;
+    /* width: calc(20vw - 15vh); */
+    height: 60vh;
     float: left;
-    padding-left: 20px;
 }
 
-p {
-    text-align: center;
+label,
+p,
+h2 {
+    text-align: left;
     margin-top: 0;
+    color: rgb(212, 235, 255);
+    font-size: calc(20vh / 12);
+}
+
+@media (max-aspect-ratio: 550 / 1920) {
+
+    label,
+    p,
+    h2 {
+        font-size: calc(20vh / 20);
+    }
 }
 
 .pClass {
     /* I want to change the color of the text in the p tag */
-    color: #00f7ff;
+    color: rgb(0, 247, 255);
+}
+
+.yellowP {
+    color: rgb(255, 255, 72);
+}
+
+.redP {
+    color: rgb(255, 57, 57);
+}
+
+.empty {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    /* border-radius: 50%; */
+    background-color: rgb(209, 209, 209);
 }
 
 .yellow {
     width: 90%;
     height: 90%;
     margin: auto;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     background-color: rgb(255, 255, 72);
 }
 
@@ -69,17 +120,21 @@ p {
     width: 90%;
     height: 90%;
     margin: auto;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     background-color: rgb(255, 57, 57);
 }
 
 @media (orientation: portrait) {
     .board {
-        margin-top: calc(50vh - 48vw);
+        /* margin-top: calc(50vh - 48vw); */
         margin-left: calc(50vw - 40vw);
         width: 80vw;
         height: 70vw;
         float: none;
+    }
+
+    #mainHeader {
+        margin-top: calc(50vh - 48vh);
     }
 
     .info {
@@ -94,6 +149,7 @@ p {
     }
 
     .board td {
+        border: 1vw solid rgb(14, 0, 136);
         width: calc(80vw / 7);
         height: calc(70vw / 6);
         font-size: calc(80vw / 9);

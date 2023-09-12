@@ -30,8 +30,7 @@ class Board {
     return /*html*/`
       <table class="board">
         ${this.grid.map(row => `<tr>${row.map(cell => `
-          <td class="${cell === 'X' ? 'yellow' : ''} ${cell === 'O' ? 'red' : ''}">
-
+          <td class="${cell === 'X' ? 'yellow' : ''}${cell === 'O' ? 'red' : ''}${cell === '' ? 'empty' : ''}">
           </td>
         `).join('')}</tr>`).join('')}
       </table>
@@ -58,6 +57,7 @@ class Board {
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === '') {
         this.grid[row][column] = playerPiece;
+        window.moveHistory.push(column)
         return true; // Piece successfully dropped
       }
     }
