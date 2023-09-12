@@ -57,6 +57,7 @@ class Board {
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === '') {
         this.grid[row][column] = playerPiece;
+        window.moveHistory.push(column)
         return true; // Piece successfully dropped
       }
     }
