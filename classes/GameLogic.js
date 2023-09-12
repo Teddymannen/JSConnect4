@@ -24,7 +24,8 @@ class GameLogic {
           this.isGameOver = true;
         } else {
           this.switchPlayer();
-          this.info = `It's ${this.players[this.currentPlayerIndex].name}'s turn.`;
+          let pIndex = this.currentPlayerIndex;
+          this.info = `<p class="${pIndex === 0 ? 'yellowP' : 'redP'}">It's ${this.players[pIndex].name}'s turn.</p>`;
         }
       } else {
         // console.log('Invalid move. Please try again.');
