@@ -1,5 +1,5 @@
 // Board tests here
-// run with "npm test"
+// run with "npm run test-jest"
 require('./load-all-classes.js');
 const getConsoleLogOutput = require('./capture-console-log.js');
 
