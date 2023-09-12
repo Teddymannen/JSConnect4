@@ -20,27 +20,29 @@ body {
     margin-left: calc(50vw - 45vh);
     width: 70vh;
     height: 60vh;
-    background-color: #999;
+    background-color: #0c0592;
     float: left;
     border-spacing: 0;
     border-collapse: collapse;
+
 }
 
 .board td {
-    border: 1px solid #fff;
+    border: 1px solid #0f0133;
     text-align: center;
     font-size: calc(70vh / 9);
     color: white;
     /* background-color: rgb(90, 90, 90); */
     width: calc(70vh / 7);
     height: calc(60vh / 6);
+
 }
 
 .info {
     background-color: #6e6e6e;
     margin-top: calc(50vh - 35vh);
     padding-left: 40px;
-    width: 20vh;
+    width: 40vh;
     float: left;
     padding-left: 20px;
 }
