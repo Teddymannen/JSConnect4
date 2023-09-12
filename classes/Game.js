@@ -53,7 +53,7 @@ class Game {
   startRender() {
     this.board = new Board(this.board.rows, this.board.columns);
     document.body.innerHTML = /*html*/`
-      <h1 id="mainHeader">Connect Four</h1>
+      <h1 class="mainHeader">Connect Four</h1>
       ${this.board.render()}
       <div class="info">
         <form class="save-name-form">
@@ -62,9 +62,10 @@ class Game {
           <button type="submit">Play!</button>
         </form>
         <div class="rules">
+          <p>Player 1 is <span class="yellowP">yellow</span></p>
+          <p>Player 2 is <span class="redP">red</span></p>
+          <hr>
           <h2>Rules:</h2>
-          <p>Player 1 is yellow</p>
-          <p>Player 2 is red</p>
           <p>Players take turns dropping a piece of their colour into a column.</p>
           <p>The piece falls to the lowest available square in the column.</p>
           <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
@@ -75,15 +76,16 @@ class Game {
 
   render(info, form) {
     document.body.innerHTML = /*html*/`
-      <h1 id="mainHeader">Connect Four</h1>
+      <h1 class="mainHeader">Connect Four</h1>
       ${this.board.render()}
       <div class="info">
         ${info}
         ${form}
         <div class="rules">
+          <p>Player 1 is <span class="yellowP">yellow</span></p>
+          <p>Player 2 is <span class="redP">red</span></p>
+          <hr>
           <h2>Rules:</h2>
-          <p>Player 1 is yellow</p>
-          <p>Player 2 is red</p>
           <p>Players take turns dropping a piece of their colour into a column.</p>
           <p>The piece falls to the lowest available square in the column.</p>
           <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
