@@ -15,11 +15,11 @@ class GameLogic {
       if (this.board.dropPiece(column, currentPlayer.symbol)) {
         this.board.display();
         if (this.checkForWin(currentPlayer)) {
-          // console.log(`${currentPlayer.name} wins!`);
+          console.log(`${currentPlayer.name} wins!`);
           this.info = `${currentPlayer.name} wins!`;
           this.isGameOver = true;
         } else if (this.board.isFull()) {
-          // console.log("It's a draw!");
+          console.log("It's a draw!");
           this.info = "It's a draw!";
           this.isGameOver = true;
         } else {
@@ -59,7 +59,8 @@ class GameLogic {
 
   switchPlayer() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % 2;
-    console.log("ThisCurrentPlayer ", this.currentPlayerIndex);
+    // console.log("ThisCurrentPlayer ", this.currentPlayerIndex);
+    console.log("It's " + this.players[this.currentPlayerIndex].name + "'s turn.");
   }
 
   checkForWin(player) {
