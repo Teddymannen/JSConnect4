@@ -7,11 +7,9 @@ class Board {
 
   createGrid() {
     const grid = new Array(this.rows);
-
     for (let i = 0; i < this.rows; i++) {
       grid[i] = new Array(this.columns).fill('');
     }
-
     return grid;
   }
 
@@ -30,7 +28,7 @@ class Board {
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === '') {
         this.grid[row][column] = playerPiece;
-        // window.moveHistory.push(column)
+        // window.moveHistory.push(column) // Add move to history array
         return true; // Piece successfully dropped
       }
     }

@@ -36,7 +36,7 @@ class GameLogic {
     if (this.isGameOver) {
       if (!this.board.isFull()) {
         this.info = `
-        <p class="pClass">${this.currentPlayer.name} wins! </p>
+        <p class="tealP">${this.currentPlayer.name} wins! </p>
         <p>Game Over!</p>`;
       } else {
         this.info = `
@@ -59,7 +59,6 @@ class GameLogic {
 
   switchPlayer() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % 2;
-    // console.log("ThisCurrentPlayer ", this.currentPlayerIndex);
     console.log("It's " + this.players[this.currentPlayerIndex].name + "'s turn.");
   }
 
@@ -80,7 +79,6 @@ class GameLogic {
         }
       }
     }
-
     // Check for vertical win
     for (let row = 0; row < rows - 3; row++) {
       for (let col = 0; col < columns; col++) {
@@ -92,7 +90,6 @@ class GameLogic {
         }
       }
     }
-
     // Check for diagonal win (bottom left to top right) 
     for (let row = 0; row < rows - 3; row++) {
       for (let col = 0; col < columns - 3; col++) {
@@ -104,7 +101,6 @@ class GameLogic {
         }
       }
     }
-
     // Check for diagonal win (top left to bottom right)
     for (let row = 3; row < rows; row++) {
       for (let col = 0; col < columns - 3; col++) {

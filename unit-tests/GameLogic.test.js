@@ -1,5 +1,5 @@
 // GameLogic tests here
-// run with "npm test"
+// run with "npm run test-jest"
 require('./load-all-classes.js');
 const getConsoleLogOutput = require('./capture-console-log.js');
 
@@ -29,7 +29,6 @@ test('Check that the makeMove() method works.', () => {
   ]);
 });
 
-// Skip this test for now. 
 test('Check for a draw if there are no winners and the board is full.', () => {
   let game = new Game(6, 7);
   let board = game.board;

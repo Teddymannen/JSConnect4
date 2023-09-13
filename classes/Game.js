@@ -4,7 +4,6 @@ class Game {
     this.player1 = new Player('Player 1', 'X');
     this.player2 = new Player('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
-    // console.log('Start a new game with "game.start()"');
     this.addEventHandlerForSubmitNames();
     this.info = "";
     this.form = "";
@@ -65,7 +64,6 @@ class Game {
           <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
         </div>
       </div>
-      
     `;
   }
 
@@ -92,7 +90,6 @@ class Game {
           const cell = tdAll[findIndex];
 
           if (!cell.classList.contains('yellow') && !cell.classList.contains('red')) {
-
             // Change colour for current player
             if (this.gameLogic.currentPlayerIndex === 0) {
               cell.classList.add('yellow');
