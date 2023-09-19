@@ -38,8 +38,16 @@ class Game {
       ${this.board.render()}
       <div class="info">
         <form class="save-name-form">
-          <label>Player 1: <input placeholder="Player 1" required></label>
-          <label>Player 2: <input placeholder="Player 2" required></label>
+          <label id="labelPlayer1">Player 1: <br><input class="inputLabel" placeholder="Player 1" required></label>
+          <input type="radio" class="player" name="radio1" value="Player" onclick="game.changeLabelText()" checked>
+          <input type="radio" class="easyBot" name="radio1" value="EasyBot" onclick="game.changeLabelText()">
+          <input type="radio" class="hardBot" name="radio1" value="HardBot" onclick="game.changeLabelText()">
+          <br>
+          <label id="labelPlayer2">Player 2: <br><input class="inputLabel" placeholder="Player 2" required></label>
+          <input type="radio" class="player" name="radio2" value="Player" onclick="game.changeLabelText()" checked>
+          <input type="radio" class="easyBot" name="radio2" value="EasyBot" onclick="game.changeLabelText()">
+          <input type="radio" class="hardBot" name="radio2" value="HardBot" onclick="game.changeLabelText()">
+          <br>
           <button type="submit">Play!</button>
         </form>
         <div class="rules">
@@ -53,6 +61,44 @@ class Game {
         </div>
       </div>
     `;
+  }
+
+  changeLabelText() {
+    let player1 = document.getElementById('labelPlayer1');
+    let player2 = document.getElementById('labelPlayer2');
+
+    let text;
+    switch (document.querySelector('input[name="radio1"]:checked').value) {
+
+      case 'Player':
+        text = "Player 1"
+        break;
+
+      case 'EasyBot':
+        text = "Easy Bot 1"
+        break;
+
+      case 'HardBot':
+        text = "Hard Bot 1"
+        break;
+    }
+    player1.innerHTML = `${text}: <br><input class="inputLabel" placeholder="${text}" required></label>`
+
+    switch (document.querySelector('input[name="radio2"]:checked').value) {
+
+      case 'Player':
+        text = "Player 2"
+        break;
+
+      case 'EasyBot':
+        text = "Easy Bot 2"
+        break;
+
+      case 'HardBot':
+        text = "Hard Bot 2"
+        break;
+    }
+    player2.innerHTML = `${text}: <br><input class="inputLabel" placeholder="${text}" required></label>`
   }
 
   render(info, form) {
@@ -128,11 +174,35 @@ class Game {
       if (saveNameForm) {
         event.preventDefault(); // do not reload web page
 
-        var player1 = saveNameForm.elements[0].value;
-        var player2 = saveNameForm.elements[1].value;
-        this.player1 = new Player(player1, 'X');
+        console.log(saveNameForm.elements)
+        var player1 = saveNameForm.querySelectorAll('.inputLabel')[0].value;
+        var player2 = saveNameForm.querySelectorAll('.inputLabel')[1].value;
+
+        if (document.querySelector('input[name="radio1"]:checked').value === 'EasyBot') {
+          this.player1 = new EasyBot(player1, 'X');
+        }
+        else if (document.querySelector('input[name="radio1"]:checked').value === 'HardBot') {
+          // this.player1 = new HardBot(player1, 'O');
+          this.player1 = new EasyBot(player1, 'X');
+        }
+        else {
+          this.player1 = new Player(player1, 'X');
+        }
+
+        if (document.querySelector('input[name="radio2"]:checked').value === 'EasyBot') {
+          this.player2 = new EasyBot(player2, 'O');
+        }
+        else if (document.querySelector('input[name="radio2"]:checked').value === 'HardBot') {
+          // this.player2 = new HardBot(player2, 'O');
+          this.player2 = new EasyBot(player2, 'O');
+        }
+        else {
+          this.player2 = new Player(player2, 'O');
+        }
+
+        // this.player1 = new Player(player1, 'X');
         // this.player1 = new EasyBot(player1, 'X');
-        this.player2 = new Player(player2, 'O');
+        // this.player2 = new Player(player2, 'O');
         // this.player2 = new EasyBot(player2, 'O');
         this.startWithPlayers();
       }
