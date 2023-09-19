@@ -35,6 +35,10 @@ class Board {
     return false; // Column is full
   }
 
+  isColumnFull(column) {
+    return this.grid[0][column] !== '';
+  }
+
   isFull() {
     return this.grid.every(row => row.every(cell => cell !== ''));
   }
