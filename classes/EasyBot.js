@@ -15,7 +15,6 @@ class EasyBot {
     autoPlay(game) {
         setTimeout(() => {
             game.play(this.getValidCol(game.board));
-        }, 1000);
+        }, 500);
     }
-
 }
