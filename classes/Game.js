@@ -130,10 +130,10 @@ class Game {
 
         var player1 = saveNameForm.elements[0].value;
         var player2 = saveNameForm.elements[1].value;
-        // this.player1 = new Player(player1, 'X');
-        this.player1 = new EasyBot(player1, 'X');
-        // this.player2 = new Player(player2, 'O');
-        this.player2 = new EasyBot(player2, 'O');
+        this.player1 = new Player(player1, 'X');
+        // this.player1 = new EasyBot(player1, 'X');
+        this.player2 = new Player(player2, 'O');
+        // this.player2 = new EasyBot(player2, 'O');
         this.startWithPlayers();
       }
     });
