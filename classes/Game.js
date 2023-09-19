@@ -3,6 +3,7 @@ class Game {
     this.board = new Board(rows, columns);
     this.player1 = new Player('Player 1', 'X');
     this.player2 = new Player('Player 2', 'O');
+    // this.player2 = new EasyBot('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
     this.addEventHandlerForSubmitNames();
     this.info = "";
@@ -21,6 +22,13 @@ class Game {
     this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
     this.render(this.info, this.form);
     this.addEventListeners();
+
+    // if player is a bot, make it play
+    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
+    this.currentPlayer = currentPlayer
+    if (this.currentPlayer instanceof EasyBot) {
+      this.currentPlayer.autoPlay(this);
+    }
   }
 
   startRender() {
@@ -70,7 +78,14 @@ class Game {
   play(column) {
     this.gameLogic.makeMove(column - 1);
     this.render(this.gameLogic.info, this.gameLogic.form);
-    this.addEventListeners();
+    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
+    this.currentPlayer = currentPlayer
+    if (this.currentPlayer instanceof EasyBot && !this.gameLogic.isGameOver) {
+      this.currentPlayer.autoPlay(this);
+    }
+    else {
+      this.addEventListeners();
+    }
   }
 
   addEventListeners() {
@@ -115,8 +130,10 @@ class Game {
 
         var player1 = saveNameForm.elements[0].value;
         var player2 = saveNameForm.elements[1].value;
-        this.player1 = new Player(player1, 'X');
-        this.player2 = new Player(player2, 'O');
+        // this.player1 = new Player(player1, 'X');
+        this.player1 = new EasyBot(player1, 'X');
+        // this.player2 = new Player(player2, 'O');
+        this.player2 = new EasyBot(player2, 'O');
         this.startWithPlayers();
       }
     });
