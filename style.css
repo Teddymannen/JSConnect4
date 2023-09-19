@@ -73,6 +73,33 @@ h2 {
     font-size: calc(20vh / 12);
 }
 
+input[type="radio"] {
+    margin: 0 0 0 0;
+    /* top right bottom left */
+    display: inline-block;
+}
+
+.player {
+    accent-color: rgb(0, 111, 207);
+}
+
+.easyBot {
+    accent-color: rgb(0, 185, 40);
+}
+
+.hardBot {
+    accent-color: rgb(255, 0, 0);
+}
+
+.inputLabel {
+    width: 50%;
+    display: inline-block;
+}
+
+button {
+    margin: 5px 0 0 0;
+}
+
 /* @media (max-aspect-ratio: 550 / 1920) {
 
     label,
