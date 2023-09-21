@@ -4,7 +4,7 @@ class EasyBot {
         this.symbol = symbol;
     }
 
-    getValidCol(board) {
+    randomMove(board) {
         let column = Math.floor(Math.random() * board.columns);
         while (board.isColumnFull(column)) {
             column = Math.floor(Math.random() * board.columns);
@@ -14,7 +14,7 @@ class EasyBot {
 
     autoPlay(game) {
         setTimeout(() => {
-            game.play(this.getValidCol(game.board));
-        }, 500);
+            game.play(this.randomMove(game.board));
+        }, 50);
     }
 }

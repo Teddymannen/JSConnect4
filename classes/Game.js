@@ -26,7 +26,7 @@ class Game {
     // if player is a bot, make it play
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
     this.currentPlayer = currentPlayer
-    if (this.currentPlayer instanceof EasyBot) {
+    if (this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) {
       this.currentPlayer.autoPlay(this);
     }
   }
@@ -126,7 +126,7 @@ class Game {
     this.render(this.gameLogic.info, this.gameLogic.form);
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
     this.currentPlayer = currentPlayer
-    if (this.currentPlayer instanceof EasyBot && !this.gameLogic.isGameOver) {
+    if ((this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) && !this.gameLogic.isGameOver) {
       this.currentPlayer.autoPlay(this);
     }
     else {
@@ -174,7 +174,7 @@ class Game {
       if (saveNameForm) {
         event.preventDefault(); // do not reload web page
 
-        console.log(saveNameForm.elements)
+        console.log(saveNameForm.elements) // debug
         var player1 = saveNameForm.querySelectorAll('.inputLabel')[0].value;
         var player2 = saveNameForm.querySelectorAll('.inputLabel')[1].value;
 
@@ -182,8 +182,8 @@ class Game {
           this.player1 = new EasyBot(player1, 'X');
         }
         else if (document.querySelector('input[name="radio1"]:checked').value === 'HardBot') {
-          // this.player1 = new HardBot(player1, 'O');
-          this.player1 = new EasyBot(player1, 'X');
+          this.player1 = new HardBot(player1, 'X');
+          // this.player1 = new EasyBot(player1, 'X');
         }
         else {
           this.player1 = new Player(player1, 'X');
@@ -193,8 +193,8 @@ class Game {
           this.player2 = new EasyBot(player2, 'O');
         }
         else if (document.querySelector('input[name="radio2"]:checked').value === 'HardBot') {
-          // this.player2 = new HardBot(player2, 'O');
-          this.player2 = new EasyBot(player2, 'O');
+          this.player2 = new HardBot(player2, 'O');
+          // this.player2 = new EasyBot(player2, 'O');
         }
         else {
           this.player2 = new Player(player2, 'O');
