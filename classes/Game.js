@@ -182,7 +182,7 @@ class Game {
           this.player1 = new EasyBot(player1, 'X');
         }
         else if (document.querySelector('input[name="radio1"]:checked').value === 'HardBot') {
-          this.player1 = new HardBot(player1, 'X');
+          this.player1 = new HardBot(player1, 'X', this.board);
           // this.player1 = new EasyBot(player1, 'X');
         }
         else {
@@ -193,7 +193,7 @@ class Game {
           this.player2 = new EasyBot(player2, 'O');
         }
         else if (document.querySelector('input[name="radio2"]:checked').value === 'HardBot') {
-          this.player2 = new HardBot(player2, 'O');
+          this.player2 = new HardBot(player2, 'O', this.board);
           // this.player2 = new EasyBot(player2, 'O');
         }
         else {
