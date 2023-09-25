@@ -4,7 +4,7 @@ class HardBot {
         this.name = "Hard Bot " + name;
         this.symbol = symbol;
         this.board = board;
-        let me = this.symbol;
+        this.me = this.symbol; // for makeMove
         this.allCombos = this.calcAllCombos();
     }
 
@@ -90,9 +90,11 @@ class HardBot {
             }
             return x.score > y.score ? -1 : 1;
         });
-        // if (this.me !== me || this.me !== this.board.currentPlayer) {
-        //     return (pm[0] || { score: 0 }).score;
-        // }
+        // is 'this.symbol' the same as 'this.game.currentPlayer'?
+        if (this.me !== me || this.me !== (this.symbol)) {
+            console.log('debug2')
+            return (pm[0] || { score: 0 }).score;
+        }
         console.log(pm)
         console.log('I rate my moves', pm.map(([_, c]) => c));
         return pm[0][1] + 1;
