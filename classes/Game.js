@@ -20,6 +20,13 @@ class Game {
     // display the board
     this.board.display();
     this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
+    this.form = /*html*/`
+    <div class="form">
+      <form onsubmit="game.startRender()">
+        <button type="submit">New Game</button>
+      </form>
+    </div>
+    `;
     this.render(this.info, this.form);
     this.addEventListeners();
 
@@ -63,44 +70,6 @@ class Game {
     `;
   }
 
-  changeLabelText() {
-    let player1 = document.getElementById('labelPlayer1');
-    let player2 = document.getElementById('labelPlayer2');
-
-    let text;
-    switch (document.querySelector('input[name="radio1"]:checked').value) {
-
-      case 'Player':
-        text = "Player 1"
-        break;
-
-      case 'EasyBot':
-        text = "Easy Bot 1"
-        break;
-
-      case 'HardBot':
-        text = "Hard Bot 1"
-        break;
-    }
-    player1.innerHTML = `${text}: <br><input class="inputLabel" placeholder="${text}" required></label>`
-
-    switch (document.querySelector('input[name="radio2"]:checked').value) {
-
-      case 'Player':
-        text = "Player 2"
-        break;
-
-      case 'EasyBot':
-        text = "Easy Bot 2"
-        break;
-
-      case 'HardBot':
-        text = "Hard Bot 2"
-        break;
-    }
-    player2.innerHTML = `${text}: <br><input class="inputLabel" placeholder="${text}" required></label>`
-  }
-
   render(info, form) {
     document.body.innerHTML = /*html*/`
       <h1 class="mainHeader">Connect Four</h1>
@@ -119,6 +88,56 @@ class Game {
         </div>
       </div>
     `;
+  }
+
+  changeLabelText() {
+    let player1 = document.getElementById('labelPlayer1');
+    let player2 = document.getElementById('labelPlayer2');
+
+    let text;
+    let val;
+    // get the value of the input field
+    let label1Value = document.getElementById('labelPlayer1').querySelector('.inputLabel').value;
+    let label2Value = document.getElementById('labelPlayer2').querySelector('.inputLabel').value;
+    // Player 1
+    switch (document.querySelector('input[name="radio1"]:checked').value) {
+
+      case 'Player':
+        val = label1Value;
+        text = "Player 1";
+        break;
+
+      case 'EasyBot':
+        val = label1Value;
+        text = "Easy Bot 1";
+        break;
+
+      case 'HardBot':
+        val = label1Value;
+        text = "Hard Bot 1";
+        break;
+    }
+    player1.innerHTML = `${text}: <br><input value="${val}" class="inputLabel" placeholder="${text}" required></label>`
+
+    // Player 2
+    switch (document.querySelector('input[name="radio2"]:checked').value) {
+
+      case 'Player':
+        val = label2Value;
+        text = "Player 2";
+        break;
+
+      case 'EasyBot':
+        val = label2Value;
+        text = "Easy Bot 2";
+        break;
+
+      case 'HardBot':
+        val = label2Value;
+        text = "Hard Bot 2";
+        break;
+    }
+    player2.innerHTML = `${text}: <br><input value="${val}" class="inputLabel" placeholder="${text}" required></label>`
   }
 
   play(column) {
