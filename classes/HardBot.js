@@ -103,7 +103,7 @@ class HardBot {
     autoPlay(game) {
         setTimeout(() => {
             game.play(this.makeMove(this.symbol, game.board.grid));
-        }, 50);
+        }, 1000);
     }
 
 }

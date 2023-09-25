@@ -15,6 +15,6 @@ class EasyBot {
     autoPlay(game) {
         setTimeout(() => {
             game.play(this.randomMove(game.board));
-        }, 50);
+        }, 1000);
     }
 }
