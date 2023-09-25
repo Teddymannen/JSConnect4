@@ -16,11 +16,11 @@ class GameLogic {
         this.board.display();
         if (this.checkForWin(currentPlayer)) {
           console.log(`${currentPlayer.name} wins!`);
-          this.info = `${currentPlayer.name} wins!`;
+          // this.info = `${currentPlayer.name} wins!`;
           this.isGameOver = true;
         } else if (this.board.isFull()) {
           console.log("It's a draw!");
-          this.info = "It's a draw!";
+          // this.info = "It's a draw!";
           this.isGameOver = true;
         } else {
           this.switchPlayer();
@@ -33,8 +33,17 @@ class GameLogic {
       }
     }
 
+    this.form = /*html*/`
+    <div class="form">
+      <form onsubmit="game.startRender()">
+        <button type="submit">New Game</button>
+      </form>
+    </div>
+    `;
+
     if (this.isGameOver) {
-      if (!this.board.isFull()) {
+      const currentPlayer = this.players[this.currentPlayerIndex];
+      if (this.checkForWin(currentPlayer)) {
         this.info = `
         <p class="tealP">${this.currentPlayer.name} wins! </p>
         <p>Game Over!</p>`;
