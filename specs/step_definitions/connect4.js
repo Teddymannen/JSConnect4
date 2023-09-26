@@ -48,3 +48,17 @@ Then('I should still see the info text {string}', (infoText) => {
 When('I click the {string} button', (buttonName) => {
   cy.get('button').contains(buttonName).click();
 });
+
+When('I click on the {string} radio button for {string}', (player, labelID) => {
+  // get label by id and click the radio button with class player
+  cy.get(`label[for="${labelID}"]`).within(() => {
+    cy.get(`input[class="${player}"]`).click();
+  });
+});
+
+Then('I should see the label text {string} and {string} for {string}', (labelText, placeholderText, labelID) => {
+  // get label by id and check the text
+  cy.get(`label[for="${labelID}"]`).contains(labelText);
+  // get input by id and check the placeholder
+  cy.get(`input[id="${labelID}"]`).should('have.attr', 'placeholder', placeholderText);
+});

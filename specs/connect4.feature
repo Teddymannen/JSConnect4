@@ -78,5 +78,16 @@ Feature: Play Connect 4
         When I click the "Same players" button
         Then I should see the info text "Let's begin. Alice goes first."
 
+    Scenario Outline: Radio buttons change label text and placeholder text
+        When I click on the "<player>" radio button for "<labelID>"
+        Then I should see the label text "<labelText>" and "<placeholderText>" for "<labelID>"
 
 
+        Examples:
+            | player  | labelID      | placeholderText | labelText   |
+            | player  | labelPlayer1 | Player 1        | Player 1:   |
+            | easyBot | labelPlayer1 | Easy Bot 1      | Easy Bot 1: |
+            | hardBot | labelPlayer1 | Hard Bot 1      | Hard Bot 1: |
+            | player  | labelPlayer2 | Player 2        | Player 2:   |
+            | easyBot | labelPlayer2 | Easy Bot 2      | Easy Bot 2: |
+            | hardBot | labelPlayer2 | Hard Bot 2      | Hard Bot 2: |
