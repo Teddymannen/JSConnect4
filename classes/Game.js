@@ -152,9 +152,7 @@ class Game {
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
     this.currentPlayer = currentPlayer
     if ((this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) && !this.gameLogic.isGameOver) {
-      if (this.gameLogic.isGameOver) {
-        return;
-      }
+
       this.currentPlayer.autoPlay(this);
     }
     else {

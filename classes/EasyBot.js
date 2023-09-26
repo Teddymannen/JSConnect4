@@ -13,7 +13,10 @@ class EasyBot {
     }
 
     autoPlay(game) {
-        const timeout = setTimeout(() => {
+        setTimeout(() => {
+            if (game.gameLogic.isGameOver) {
+                return;
+            }
             game.play(this.randomMove(game.board));
         }, 1000);
     }

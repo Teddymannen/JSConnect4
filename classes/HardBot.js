@@ -102,6 +102,9 @@ class HardBot {
 
     autoPlay(game) {
         setTimeout(() => {
+            if (game.gameLogic.isGameOver) {
+                return;
+            }
             game.play(this.makeMove(this.symbol, game.board.grid));
         }, 1000);
     }
