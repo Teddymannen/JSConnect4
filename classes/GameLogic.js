@@ -9,6 +9,7 @@ class GameLogic {
   }
 
   makeMove(column) {
+    console.log(this.isGameOver)
     if (!this.isGameOver) {
       const currentPlayer = this.players[this.currentPlayerIndex];
       this.currentPlayer = currentPlayer
@@ -35,8 +36,8 @@ class GameLogic {
 
     this.form = /*html*/`
     <div class="form">
-      <form onsubmit="game.startRender()">
-        <button type="submit">New Game</button>
+      <form onsubmit="game.startRender(); game.gamelogic.isGameover = true;">
+        <button type="submit">Restart</button>
       </form>
     </div>
     `;
@@ -55,10 +56,10 @@ class GameLogic {
 
       this.form = /*html*/`
       <div class="form">
-        <form onsubmit="game.startWithPlayers()">
+        <form onsubmit="game.startWithPlayers();">
           <button type="submit">Same players</button>
         </form>
-        <form onsubmit="game.startRender()">
+        <form onsubmit="game.startRender();">
           <button type="submit">New Game</button>
         </form>
       </div>

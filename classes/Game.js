@@ -22,8 +22,8 @@ class Game {
     this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
     this.form = /*html*/`
     <div class="form">
-      <form onsubmit="game.startRender()">
-        <button type="submit">New Game</button>
+      <form onsubmit="game.startRender();">
+        <button type="submit">Restart</button>
       </form>
     </div>
     `;
