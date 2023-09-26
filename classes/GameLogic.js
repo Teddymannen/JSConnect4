@@ -9,7 +9,6 @@ class GameLogic {
   }
 
   makeMove(column) {
-    console.log(this.isGameOver)
     if (!this.isGameOver) {
       const currentPlayer = this.players[this.currentPlayerIndex];
       this.currentPlayer = currentPlayer
