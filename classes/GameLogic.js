@@ -36,7 +36,7 @@ class GameLogic {
 
     this.form = /*html*/`
     <div class="form">
-      <form onsubmit="game.startRender(); game.gamelogic.isGameover = true;">
+      <form onsubmit="game.startRender(); game.stopGame();">
         <button type="submit">Restart</button>
       </form>
     </div>
@@ -48,7 +48,7 @@ class GameLogic {
         this.info = `
         <p class="tealP">${this.currentPlayer.name} wins! </p>
         <p>Game Over!</p>`;
-      } else {
+      } else if (this.board.isFull()) {
         this.info = `
         <p>It's a draw!</p>
         <p>Game Over!</p>`;
