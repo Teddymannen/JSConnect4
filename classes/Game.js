@@ -147,14 +147,14 @@ class Game {
   }
 
   play(column) {
-    if (this.gameLogic.isGameOver) {
-      return;
-    }
     this.gameLogic.makeMove(column - 1);
     this.render(this.gameLogic.info, this.gameLogic.form);
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
     this.currentPlayer = currentPlayer
     if ((this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) && !this.gameLogic.isGameOver) {
+      if (this.gameLogic.isGameOver) {
+        return;
+      }
       this.currentPlayer.autoPlay(this);
     }
     else {
