@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test-jest": "jest",
+    "test-jest": "jest --silent",
     "test-ui": "cypress open --browser chrome",
     "test": "cypress run --browser chrome",
     "make-steps": "node _auto-generate-step-definitions.js",
