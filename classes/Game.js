@@ -11,6 +11,12 @@ class Game {
     this.startRender();
   }
 
+  stopGame() {
+    console.log('stopGame called');
+    // set isGameOver to true
+    this.gameLogic.isGameOver = true;
+  }
+
   startWithPlayers() {
     // clear the board
     this.board = new Board(this.board.rows, this.board.columns);
@@ -22,7 +28,7 @@ class Game {
     this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
     this.form = /*html*/`
     <div class="form">
-      <form onsubmit="game.startRender();">
+      <form onsubmit="game.startRender(); game.stopGame();">
         <button type="submit">Restart</button>
       </form>
     </div>
@@ -141,6 +147,9 @@ class Game {
   }
 
   play(column) {
+    if (this.gameLogic.isGameOver) {
+      return;
+    }
     this.gameLogic.makeMove(column - 1);
     this.render(this.gameLogic.info, this.gameLogic.form);
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
