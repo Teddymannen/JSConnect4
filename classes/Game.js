@@ -8,7 +8,8 @@ class Game {
     this.addEventHandlerForSubmitNames();
     this.info = "";
     this.form = "";
-    this.startRender();
+    this.menuRender();
+    // this.startRender();
   }
 
   stopGame() {
@@ -74,6 +75,33 @@ class Game {
         </div>
       </div>
     `;
+  }
+
+  menuRender() {
+    this.board = new Board(this.board.rows, this.board.columns);
+    document.body.innerHTML = /*html*/`
+      <h1 class="mainHeader">Connect Four</h1>
+      ${this.board.render()}
+      <div class="info">
+        <div class="form">
+          <form onsubmit="game.startWithPlayers();">
+            <button type="submit">Online</button>
+          </form>
+          <form onsubmit="game.startRender();">
+            <button type="submit">Offline</button>
+          </form>
+        </div>
+        <div class="instructions">
+          <hr>
+          <h2>Instructions:</h2>
+          <p>Choose between playing online or offline.</p>
+        </div>
+      </div>
+    `;
+  }
+
+  onlineRender() {
+
   }
 
   render(info, form) {
