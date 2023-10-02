@@ -35,7 +35,7 @@ class GameLogic {
 
     this.form = /*html*/`
     <div class="form">
-      <form onsubmit="game.startRender(); game.stopGame();">
+      <form onsubmit="game.offlineRender(); game.stopGame();">
         <button type="submit">Restart</button>
       </form>
     </div>
@@ -58,8 +58,11 @@ class GameLogic {
         <form onsubmit="game.startWithPlayers();">
           <button type="submit">Same players</button>
         </form>
-        <form onsubmit="game.startRender();">
+        <form onsubmit="game.offlineRender();">
           <button type="submit">New Game</button>
+        </form>
+        <form onsubmit="game.menuRender();">
+          <button type="submit">Main menu</button>
         </form>
       </div>
       `;

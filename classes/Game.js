@@ -9,7 +9,6 @@ class Game {
     this.info = "";
     this.form = "";
     this.menuRender();
-    // this.startRender();
   }
 
   stopGame() {
@@ -29,7 +28,7 @@ class Game {
     this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
     this.form = /*html*/`
     <div class="form">
-      <form onsubmit="game.startRender(); game.stopGame();">
+      <form onsubmit="game.offlineRender(); game.stopGame();">
         <button type="submit">Restart</button>
       </form>
     </div>
@@ -45,10 +44,10 @@ class Game {
     }
   }
 
-  startRender() {
+  offlineRender() {
     this.board = new Board(this.board.rows, this.board.columns);
     document.body.innerHTML = /*html*/`
-      <h1 class="mainHeader">Connect Four</h1>
+      <h1 class="mainHeader">Connect Four - Offline</h1>
       ${this.board.render()}
       <div class="info">
         <form class="save-name-form">
@@ -63,6 +62,9 @@ class Game {
           <input type="radio" class="hardBot" name="radio2" value="HardBot" onclick="game.changeLabelText()">
           <br>
           <button type="submit">Play!</button>
+        </form>
+        <form onsubmit="game.menuRender();">
+          <button type="submit">Main menu</button>
         </form>
         <div class="rules">
           <p>Player 1 is <span class="yellowP">yellow</span></p>
@@ -84,10 +86,10 @@ class Game {
       ${this.board.render()}
       <div class="info">
         <div class="form">
-          <form onsubmit="game.startWithPlayers();">
+          <form onsubmit="game.onlineRender();">
             <button type="submit">Online</button>
           </form>
-          <form onsubmit="game.startRender();">
+          <form onsubmit="game.offlineRender();">
             <button type="submit">Offline</button>
           </form>
         </div>
@@ -101,7 +103,35 @@ class Game {
   }
 
   onlineRender() {
-
+    this.board = new Board(this.board.rows, this.board.columns);
+    document.body.innerHTML = /*html*/`
+      <h1 class="mainHeader">Connect Four - Online</h1>
+      ${this.board.render()}
+      <div class="info">
+        <form class="save-name-form-online">
+          <label id="labelPlayer">Player: <br><input class="inputLabel" placeholder="Player" required></label>
+          <input type="radio" class="player" name="radio" value="Player" onclick="game.changeLabelTextOnline()" checked>
+          <input type="radio" class="easyBot" name="radio" value="EasyBot" onclick="game.changeLabelTextOnline()">
+          <input type="radio" class="hardBot" name="radio" value="HardBot" onclick="game.changeLabelTextOnline()">
+          <br>
+          <label id="labelChannel">Channel: <br><input class="inputLabel" placeholder="Channel" required></label>
+          <br>
+          <button type="submit">Play!</button>
+        </form>
+        <form onsubmit="game.menuRender();">
+          <button type="submit">Main menu</button>
+        </form>
+        <div class="rules">
+          <p>Player 1 is <span class="yellowP">yellow</span></p>
+          <p>Player 2 is <span class="redP">red</span></p>
+          <hr>
+          <h2>Rules:</h2>
+          <p>Players take turns dropping a piece of their colour into a column.</p>
+          <p>The piece falls to the lowest available square in the column.</p>
+          <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
+        </div>
+      </div>
+    `;
   }
 
   render(info, form) {
@@ -172,6 +202,35 @@ class Game {
         break;
     }
     player2.innerHTML = `${text}: <br><input value="${val}" class="inputLabel" placeholder="${text}" required></label>`
+  }
+
+  changeLabelTextOnline() {
+    let player = document.getElementById('labelPlayer');
+
+    let text;
+    let val;
+    // get the value of the input field
+    let labelValue = document.getElementById('labelPlayer').querySelector('.inputLabel').value;
+    // Player 1
+    switch (document.querySelector('input[name="radio"]:checked').value) {
+
+      case 'Player':
+        val = labelValue;
+        text = "Player";
+        break;
+
+      case 'EasyBot':
+        val = labelValue;
+        text = "Easy Bot";
+        break;
+
+      case 'HardBot':
+        val = labelValue;
+        text = "Hard Bot";
+        break;
+    }
+    player.innerHTML = `${text}: <br><input value="${val}" class="inputLabel" placeholder="${text}" required></label>`
+
   }
 
   play(column) {
