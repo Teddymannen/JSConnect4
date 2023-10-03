@@ -33,13 +33,25 @@ class GameLogic {
       }
     }
 
-    this.form = /*html*/`
-    <div class="form">
-      <form onsubmit="game.offlineRender(); game.stopGame();">
-        <button type="submit">Restart</button>
-      </form>
-    </div>
-    `;
+    if (this.players[0] instanceof OnlinePlayer || this.players[1] instanceof OnlinePlayer) {
+      this.form = /*html*/`
+      <div class="form">
+        <form onsubmit="game.onlineRender(); game.stopGame();">
+          <button type="submit">Restart</button>
+        </form>
+      </div>
+      `;
+    }
+    else {
+      this.form = /*html*/`
+      <div class="form">
+        <form onsubmit="game.offlineRender(); game.stopGame();">
+          <button type="submit">Restart</button>
+        </form>
+      </div>
+      `;
+    }
+
 
     if (this.isGameOver) {
       const currentPlayer = this.players[this.currentPlayerIndex];

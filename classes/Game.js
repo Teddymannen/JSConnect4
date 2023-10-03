@@ -1,4 +1,8 @@
 class Game {
+
+  maxPlayers = 2; // max number of players
+  players = []; // array of players
+
   constructor(rows, columns) {
     this.board = new Board(rows, columns);
     this.player1 = new Player('Player 1', 'X');
@@ -6,42 +10,40 @@ class Game {
     // this.player2 = new EasyBot('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
     this.addEventHandlerForSubmitNames();
+    this.addEventHandlerForSubmitNamesOnline();
     this.info = "";
     this.form = "";
     this.menuRender();
+    this.channel = "";
+
+    window.send = this.sendMessage; // debug
   }
 
-  stopGame() {
-    console.log('stopGame called');
-    // set isGameOver to true
-    this.gameLogic.isGameOver = true;
+  sendMessage(message) {
+    Network.send(message);
   }
 
-  startWithPlayers() {
-    // clear the board
+  menuRender() {
     this.board = new Board(this.board.rows, this.board.columns);
-    console.log('Welcome to Connect Four!');
-    this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
-
-    // display the board
-    this.board.display();
-    this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
-    this.form = /*html*/`
-    <div class="form">
-      <form onsubmit="game.offlineRender(); game.stopGame();">
-        <button type="submit">Restart</button>
-      </form>
-    </div>
+    document.body.innerHTML = /*html*/`
+      <h1 class="mainHeader">Connect Four</h1>
+      ${this.board.render()}
+      <div class="info">
+        <div class="form">
+          <form onsubmit="game.onlineRender();">
+            <button type="submit">Online</button>
+          </form>
+          <form onsubmit="game.offlineRender();">
+            <button type="submit">Offline</button>
+          </form>
+        </div>
+        <div class="instructions">
+          <hr>
+          <h2>Instructions:</h2>
+          <p>Choose between playing online or offline.</p>
+        </div>
+      </div>
     `;
-    this.render(this.info, this.form);
-    this.addEventListeners();
-
-    // if player is a bot, make it play
-    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
-    this.currentPlayer = currentPlayer
-    if (this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) {
-      this.currentPlayer.autoPlay(this);
-    }
   }
 
   offlineRender() {
@@ -79,31 +81,9 @@ class Game {
     `;
   }
 
-  menuRender() {
-    this.board = new Board(this.board.rows, this.board.columns);
-    document.body.innerHTML = /*html*/`
-      <h1 class="mainHeader">Connect Four</h1>
-      ${this.board.render()}
-      <div class="info">
-        <div class="form">
-          <form onsubmit="game.onlineRender();">
-            <button type="submit">Online</button>
-          </form>
-          <form onsubmit="game.offlineRender();">
-            <button type="submit">Offline</button>
-          </form>
-        </div>
-        <div class="instructions">
-          <hr>
-          <h2>Instructions:</h2>
-          <p>Choose between playing online or offline.</p>
-        </div>
-      </div>
-    `;
-  }
-
   onlineRender() {
     this.board = new Board(this.board.rows, this.board.columns);
+    this.players = [];
     document.body.innerHTML = /*html*/`
       <h1 class="mainHeader">Connect Four - Online</h1>
       ${this.board.render()}
@@ -132,6 +112,91 @@ class Game {
         </div>
       </div>
     `;
+  }
+
+  stopGame() {
+    console.log('stopGame called');
+    // set isGameOver to true
+    this.gameLogic.isGameOver = true;
+  }
+
+  startWithPlayers() {
+    // clear the board
+    this.board = new Board(this.board.rows, this.board.columns);
+    console.log('Welcome to Connect Four!');
+    this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+
+    // display the board
+    this.board.display();
+    this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
+    this.form = /*html*/`
+    <div class="form">
+      <form onsubmit="game.offlineRender(); game.stopGame();">
+        <button type="submit">Restart</button>
+      </form>
+    </div>
+    `;
+    this.render(this.info, this.form);
+    this.addEventListeners();
+
+    // if player is a bot, make it play
+    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
+    this.currentPlayer = currentPlayer
+    if (this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) {
+      this.currentPlayer.autoPlay(this);
+    }
+  }
+
+  startWithPlayersOnline() {
+    // clear the board
+    this.board = new Board(this.board.rows, this.board.columns);
+    console.log('Welcome to Connect Four!');
+    this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
+
+    // display the board
+    this.board.display();
+    // this.info = `<p>Let's begin. ${this.player1.name} goes first.</p>`;
+    this.info = `<p>Let's begin. ${this.players[0]} goes first.</p>`;
+    this.form = /*html*/`
+    <div class="form">
+      <form onsubmit="game.onlineRender(); game.stopGame();">
+        <button type="submit">Restart</button>
+      </form>
+    </div>
+    `;
+    this.render(this.info, this.form);
+    // add event listeners if it's my turn
+    if (this.players[0] === this.user) {
+      this.addEventListeners();
+    }
+
+    // if player is a bot, make it play
+    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
+    this.currentPlayer = currentPlayer
+    console.log('current player:', currentPlayer)
+    if (this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) {
+      console.log('autoplay function called')
+      this.currentPlayer.autoPlay(this);
+    }
+  }
+
+  play(column) {
+    this.gameLogic.makeMove(column - 1);
+    this.render(this.gameLogic.info, this.gameLogic.form);
+
+    // if not online player - send message
+    if (!(this.currentPlayer instanceof OnlinePlayer)) {
+      Network.send(column);
+    }
+
+    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
+    this.currentPlayer = currentPlayer
+    if ((this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) && !this.gameLogic.isGameOver) {
+      this.currentPlayer.autoPlay(this);
+    }
+    else if (this.currentPlayer instanceof Player) {
+      this.addEventListeners();
+    }
   }
 
   render(info, form) {
@@ -233,19 +298,6 @@ class Game {
 
   }
 
-  play(column) {
-    this.gameLogic.makeMove(column - 1);
-    this.render(this.gameLogic.info, this.gameLogic.form);
-    const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
-    this.currentPlayer = currentPlayer
-    if ((this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) && !this.gameLogic.isGameOver) {
-      this.currentPlayer.autoPlay(this);
-    }
-    else {
-      this.addEventListeners();
-    }
-  }
-
   addEventListeners() {
     let tdAll = document.querySelectorAll('td');
     // Add event listener for each column
@@ -311,11 +363,6 @@ class Game {
         else {
           this.player2 = new Player(player2, 'O');
         }
-
-        // this.player1 = new Player(player1, 'X');
-        // this.player1 = new EasyBot(player1, 'X');
-        // this.player2 = new Player(player2, 'O');
-        // this.player2 = new EasyBot(player2, 'O');
         this.startWithPlayers();
       }
     });
@@ -323,5 +370,104 @@ class Game {
     document.body.removeEventListener('submit', this.nameSubmitHandler);
     // Add submit handler
     document.body.addEventListener('submit', this.nameSubmitHandler);
+  }
+
+  addEventHandlerForSubmitNamesOnline() {
+    // Create a submit handler function if it does not exist
+    this.nameSubmitHandlerOnline = this.nameSubmitHandlerOnline || (event => {
+      let saveNameFormOnline = event.target.closest('.save-name-form-online');
+      // only do something if we submit the save-name-form
+      if (saveNameFormOnline) {
+        event.preventDefault(); // do not reload web page
+
+        console.log(saveNameFormOnline.elements) // debug
+        var player = saveNameFormOnline.querySelectorAll('.inputLabel')[0].value;
+        var channel = saveNameFormOnline.querySelectorAll('.inputLabel')[1].value;
+
+
+        if (document.querySelector('input[name="radio"]:checked').value === 'EasyBot') {
+          this.player1 = new EasyBot(player, 'X');
+        }
+        else if (document.querySelector('input[name="radio"]:checked').value === 'HardBot') {
+          this.player1 = new HardBot(player, 'X', this.board);
+          // this.player1 = new EasyBot(player, 'X');
+        }
+        else {
+          this.player1 = new Player(player, 'X');
+        }
+        this.user = this.player1.name;
+
+        this.player2 = new OnlinePlayer('Player 2', 'O');
+
+        Network.startConnection(
+          this.user,
+          channel,
+          (...args) => this.messageListener(...args)
+        );
+      }
+    });
+    // Remove submit handler (so we can never have double submit handlers)
+    document.body.removeEventListener('submit', this.nameSubmitHandlerOnline);
+    // Add submit handler
+    document.body.addEventListener('submit', this.nameSubmitHandlerOnline);
+  }
+
+  messageListener({ timestamp, user, data }) {
+    let niceTime = new Date(timestamp).toLocaleString('sv-SE');
+    console.log('time', niceTime, '\nuser', user, '\ndata', data);
+
+    // keep track of joining players - add them to this.players
+    if (
+      user === 'system'
+      && data.includes(`joined channel`)
+    ) {
+      let playerName = data.split('User ')[1].split(' joined')[0];
+      // if enough players already - do not allow
+      if (this.players.length >= this.maxPlayers) {
+        if (playerName === this.user) {
+          console.log('SORRY YOU CAN\'T JOIN ' +
+            '- ALREADY TWO PLAYERS IN GAME!');
+        }
+      }
+      // not enough players - add
+      else {
+        this.players.push(playerName);
+        console.log('this.players', this.players);
+        // if player.length === 2, change the last player to player2
+        if (this.players.length === 2) {
+          if (this.player1.name === this.players[0]) {
+            this.player2 = new OnlinePlayer(this.players[1], 'O');
+          }
+          else {
+            const tempPlayer = this.player1;
+            this.player1 = new OnlinePlayer(this.players[0], 'X');
+            this.player2 = tempPlayer;
+            this.player2.symbol = 'O';
+          }
+          this.startWithPlayersOnline();
+        }
+      }
+    }
+
+    // only if a message comes from player1 or player2
+    // do something about it - otherwise ignore
+    // user -> the user who sent the message,
+    // this.user -> me, the user on this computer
+    if (this.players.includes(user) && this.players.includes(this.user)) {
+      // if ((this.player1.name === user && this.player1 instanceof OnlinePlayer) || (this.player2.name === user && this.player2 instanceof OnlinePlayer)) {
+      //   this.play(data);
+      // }
+      // If the message is from the other player
+      if (user !== this.user) {
+        // If the message is between 1 and 7
+        if (data > 0 && data < 8) {
+          // Play the move
+          this.play(data);
+        }
+      }
+
+      console.log(user, data);
+      // Call some method, makeMove?
+    }
   }
 }
