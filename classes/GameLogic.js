@@ -25,7 +25,7 @@ class GameLogic {
         } else {
           this.switchPlayer();
           let pIndex = this.currentPlayerIndex;
-          this.info = `<p class="${pIndex === 0 ? 'yellowP' : 'redP'}">It's ${this.players[pIndex].name}'s turn.</p>`;
+          this.info = `<p class="${pIndex === 0 ? 'redP' : 'yellowP'}">It's ${this.players[pIndex].name}'s turn.</p>`;
         }
       } else {
         // console.log('Invalid move. Please try again.');
@@ -65,19 +65,37 @@ class GameLogic {
         <p>Game Over!</p>`;
       }
 
-      this.form = /*html*/`
-      <div class="form">
-        <form onsubmit="game.startWithPlayers();">
-          <button type="submit">Same players</button>
-        </form>
-        <form onsubmit="game.offlineRender();">
-          <button type="submit">New Game</button>
-        </form>
-        <form onsubmit="game.menuRender();">
-          <button type="submit">Main menu</button>
-        </form>
-      </div>
-      `;
+      if (this.players[0] instanceof OnlinePlayer || this.players[1] instanceof OnlinePlayer) {
+        this.form = /*html*/`
+        <div class="form">
+          <form onsubmit="game.startWithPlayersOnline();">
+            <button type="submit">Same players</button>
+          </form>
+          <form onsubmit="game.onlineRender();">
+            <button type="submit">New Game</button>
+          </form>
+          <form onsubmit="game.menuRender();">
+            <button type="submit">Main menu</button>
+          </form>
+        </div>
+        `;
+      }
+      else {
+        this.form = /*html*/`
+        <div class="form">
+          <form onsubmit="game.startWithPlayers();">
+            <button type="submit">Same players</button>
+          </form>
+          <form onsubmit="game.offlineRender();">
+            <button type="submit">New Game</button>
+          </form>
+          <form onsubmit="game.menuRender();">
+            <button type="submit">Main menu</button>
+          </form>
+        </div>
+        `;
+      }
+
     }
   }
 
