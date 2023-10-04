@@ -17,7 +17,7 @@ class Board {
     return /*html*/`
       <table class="board">
         ${this.grid.map(row => `<tr>${row.map(cell => `
-          <td class="${cell === 'X' ? 'yellow' : ''}${cell === 'O' ? 'red' : ''}${cell === '' ? 'empty' : ''}">
+          <td class="${cell === 'X' ? 'red' : ''}${cell === 'O' ? 'yellow' : ''}${cell === '' ? 'empty' : ''}">
           </td>
         `).join('')}</tr>`).join('')}
       </table>
