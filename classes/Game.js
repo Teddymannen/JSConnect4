@@ -7,7 +7,6 @@ class Game {
     this.board = new Board(rows, columns);
     this.player1 = new Player('Player 1', 'X');
     this.player2 = new Player('Player 2', 'O');
-    // this.player2 = new EasyBot('Player 2', 'O');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
     this.addEventHandlerForSubmitNames();
     this.addEventHandlerForSubmitNamesOnline();
@@ -19,7 +18,7 @@ class Game {
     window.send = this.sendMessage; // debug
   }
 
-  sendMessage(message) {
+  sendMessage(message) { // debug
     Network.send(message);
   }
 
@@ -69,8 +68,8 @@ class Game {
           <button type="submit">Main menu</button>
         </form>
         <div class="rules">
-          <p>Player 1 is <span class="yellowP">yellow</span></p>
-          <p>Player 2 is <span class="redP">red</span></p>
+          <p>Player 1 is <span class="redP">red</span></p>
+          <p>Player 2 is <span class="yellowP">yellow</span></p>
           <hr>
           <h2>Rules:</h2>
           <p>Players take turns dropping a piece of their colour into a column.</p>
@@ -97,18 +96,18 @@ class Game {
           <label id="labelChannel">Channel: <br><input class="inputLabel" placeholder="Channel" required></label>
           <br>
           <button type="submit">Play!</button>
-        </form>
-        <form onsubmit="game.menuRender();">
+          </form>
+          <form onsubmit="game.menuRender();">
           <button type="submit">Main menu</button>
-        </form>
-        <div class="rules">
-          <p>Player 1 is <span class="yellowP">yellow</span></p>
-          <p>Player 2 is <span class="redP">red</span></p>
+          </form>
+          <div class="rules">
+          <p>Player 1 is <span class="redP">red</span></p>
+          <p>Player 2 is <span class="yellowP">yellow</span></p>
           <hr>
           <h2>Rules:</h2>
-          <p>Players take turns dropping a piece of their colour into a column.</p>
-          <p>The piece falls to the lowest available square in the column.</p>
-          <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
+        <p>Players take turns dropping a piece of their colour into a column.</p>
+        <p>The piece falls to the lowest available square in the column.</p>
+        <p>The first player to get four of their pieces in a row (horizontally, vertically or diagonally) wins.</p>
         </div>
       </div>
     `;
@@ -173,9 +172,7 @@ class Game {
     // if player is a bot, make it play
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
     this.currentPlayer = currentPlayer
-    console.log('current player:', currentPlayer)
     if (this.currentPlayer instanceof EasyBot || this.currentPlayer instanceof HardBot) {
-      console.log('autoplay function called')
       this.currentPlayer.autoPlay(this);
     }
   }
@@ -200,6 +197,9 @@ class Game {
   }
 
   render(info, form) {
+    const p1 = this.gameLogic.players[0].name;
+    const p2 = this.gameLogic.players[1].name;
+
     document.body.innerHTML = /*html*/`
       <h1 class="mainHeader">Connect Four</h1>
       ${this.board.render()}
@@ -207,8 +207,8 @@ class Game {
         ${info}
         ${form}
         <div class="rules">
-          <p>Player 1 is <span class="yellowP">yellow</span></p>
-          <p>Player 2 is <span class="redP">red</span></p>
+          <p>${p1} is <span class="redP">red</span></p>
+          <p>${p2} is <span class="yellowP">yellow</span></p>
           <hr>
           <h2>Rules:</h2>
           <p>Players take turns dropping a piece of their colour into a column.</p>
@@ -314,12 +314,12 @@ class Game {
           // with the index, ie fetch the n:th index from tdAll
           const cell = tdAll[findIndex];
 
-          if (!cell.classList.contains('yellow') && !cell.classList.contains('red')) {
+          if (!cell.classList.contains('red') && !cell.classList.contains('yellow')) {
             // Change colour for current player
             if (this.gameLogic.currentPlayerIndex === 0) {
-              cell.classList.add('yellow');
-            } else {
               cell.classList.add('red');
+            } else {
+              cell.classList.add('yellow');
             }
             this.play(column + 1);
             // Stop searching when empty cell is found
@@ -445,6 +445,10 @@ class Game {
             this.player2.symbol = 'O';
           }
           this.startWithPlayersOnline();
+        }
+        else {
+          this.info = `<p>Waiting for another player to join...</p>`;
+          this.render(this.info, this.form);
         }
       }
     }
