@@ -18,8 +18,8 @@ class Board {
     return /*html*/`
       <table class="board">
         ${this.grid.map((row, rowIndex) => `<tr>${row.map((cell, cellIndex) => `
-          <td class="${cell === 'X' ? 'red' : ''}${cell === 'O' ? 'yellow' : ''} 
-          ${cell === '' ? 'empty' : ''}${this.lastPlayedCell[0] === rowIndex && this.lastPlayedCell[1] === cellIndex ? 'last-played' : ''}">
+          <td class="${cell === 'X' ? 'red' : ''}${cell === 'O' ? 'yellow' : ''}${cell === '' ? 'empty' : ''}
+          ${this.lastPlayedCell[0] === rowIndex && this.lastPlayedCell[1] === cellIndex ? 'last-played' : ''}">
           </td>
         `).join('')}</tr>`).join('')}
       </table>
