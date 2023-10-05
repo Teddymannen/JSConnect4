@@ -3,6 +3,7 @@ class Board {
     this.rows = rows;
     this.columns = columns;
     this.grid = this.createGrid();
+    this.lastPlayedCell = [null, null]; // [row, column]
   }
 
   createGrid() {
@@ -16,8 +17,9 @@ class Board {
   render() {
     return /*html*/`
       <table class="board">
-        ${this.grid.map(row => `<tr>${row.map(cell => `
-          <td class="${cell === 'X' ? 'red' : ''}${cell === 'O' ? 'yellow' : ''}${cell === '' ? 'empty' : ''}">
+        ${this.grid.map((row, rowIndex) => `<tr>${row.map((cell, cellIndex) => `
+          <td class="${cell === 'X' ? 'red' : ''}${cell === 'O' ? 'yellow' : ''} 
+          ${cell === '' ? 'empty' : ''}${this.lastPlayedCell[0] === rowIndex && this.lastPlayedCell[1] === cellIndex ? 'last-played' : ''}">
           </td>
         `).join('')}</tr>`).join('')}
       </table>
@@ -29,6 +31,7 @@ class Board {
       if (this.grid[row][column] === '') {
         this.grid[row][column] = playerPiece;
         // window.moveHistory.push(column) // Add move to history array
+        this.lastPlayedCell = [row, column]; // Update last played cell.
         return true; // Piece successfully dropped
       }
     }
