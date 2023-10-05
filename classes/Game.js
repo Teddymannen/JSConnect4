@@ -81,6 +81,7 @@ class Game {
   }
 
   onlineRender() {
+    Network.disconnect();
     this.board = new Board(this.board.rows, this.board.columns);
     this.players = [];
     document.body.innerHTML = /*html*/`
@@ -147,8 +148,15 @@ class Game {
   }
 
   startWithPlayersOnline() {
+
+    // if board is not empty, send resetBoard to server
+    if (!this.board.isEmpty()) {
+      Network.send('resetBoard');
+    }
+
     // clear the board
     this.board = new Board(this.board.rows, this.board.columns);
+
     console.log('Welcome to Connect Four!');
     this.gameLogic = new GameLogic(this.player1, this.player2, this.board);
 
@@ -159,7 +167,7 @@ class Game {
     this.form = /*html*/`
     <div class="form">
       <form onsubmit="game.onlineRender(); game.stopGame();">
-        <button type="submit">Restart</button>
+        <button type="submit">Disconnect</button>
       </form>
     </div>
     `;
@@ -183,7 +191,7 @@ class Game {
 
     // if not online player - send message
     if (!(this.currentPlayer instanceof OnlinePlayer)) {
-      Network.send(column);
+      Network.send(column - 1); // -1 because column is 1-7 and data is 0-6
     }
 
     const currentPlayer = this.gameLogic.players[this.gameLogic.currentPlayerIndex];
@@ -435,15 +443,17 @@ class Game {
         console.log('this.players', this.players);
         // if player.length === 2, change the last player to player2
         if (this.players.length === 2) {
-          if (this.player1.name === this.players[0]) {
-            this.player2 = new OnlinePlayer(this.players[1], 'O');
-          }
-          else {
-            const tempPlayer = this.player1;
+          const self = this.player1;
+          if (this.players[0] !== self.name) {
             this.player1 = new OnlinePlayer(this.players[0], 'X');
-            this.player2 = tempPlayer;
+            this.player2 = self;
             this.player2.symbol = 'O';
           }
+          if (this.players[1] !== self.name) {
+            this.player2 = new OnlinePlayer(this.players[1], 'O');
+          }
+
+
           this.startWithPlayersOnline();
         }
         else {
@@ -457,16 +467,21 @@ class Game {
     // do something about it - otherwise ignore
     // user -> the user who sent the message,
     // this.user -> me, the user on this computer
-    if (this.players.includes(user) && this.players.includes(this.user)) {
+    if (this.players.includes(user) /*&& this.players.includes(this.user)*/) {
       // if ((this.player1.name === user && this.player1 instanceof OnlinePlayer) || (this.player2.name === user && this.player2 instanceof OnlinePlayer)) {
       //   this.play(data);
       // }
       // If the message is from the other player
       if (user !== this.user) {
-        // If the message is between 1 and 7
-        if (data > 0 && data < 8) {
+        // If the message is between 0 and 6 and is a number
+
+        // if (typeof data === 'number' && data >= 0 && data < 7) {
+        if (Number.isInteger(data) && data >= 0 && data < 7) {
           // Play the move
-          this.play(data);
+          this.play(data + 1); // +1 because data is 0-6 and play is 1-7
+        }
+        else if (data === 'resetBoard') {
+          this.startWithPlayersOnline();
         }
       }
 

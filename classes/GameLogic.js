@@ -37,7 +37,7 @@ class GameLogic {
       this.form = /*html*/`
       <div class="form">
         <form onsubmit="game.onlineRender(); game.stopGame();">
-          <button type="submit">Restart</button>
+          <button type="submit">Disconnect</button>
         </form>
       </div>
       `;

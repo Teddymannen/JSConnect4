@@ -43,6 +43,10 @@ class Board {
     return this.grid.every(row => row.every(cell => cell !== ''));
   }
 
+  isEmpty() {
+    return this.grid.every(row => row.every(cell => cell === ''));
+  }
+
   display() {
     for (let row = 0; row < this.rows; row++) {
       let rowStr = '|';

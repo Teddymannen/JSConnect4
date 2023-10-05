@@ -5,6 +5,7 @@ class Network {
   static token = 0;
   static latest = 0;
   static urlPrefix = 'https://sse.nodehill.com';
+  static eventSource = null;
 
 
   static startConnection(_user, _channel, listener) {
@@ -13,7 +14,7 @@ class Network {
     Network.channel = _channel;
 
     const eventSource = new EventSource(Network.urlPrefix + `/api/listen/${Network.channel}/${Network.user}/${Network.latest}`);
-
+    Network.eventSource = eventSource;
     eventSource.addEventListener('token', event => {
       Network.token = JSON.parse(event.data);
     });
@@ -38,4 +39,9 @@ class Network {
     })).json();
   }
 
+  static disconnect() {
+    if (Network.eventSource) {
+      Network.eventSource.close();
+    }
+  }
 }
