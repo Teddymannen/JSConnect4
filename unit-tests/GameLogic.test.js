@@ -1,3 +1,4 @@
+globalThis.testOn = true;
 // GameLogic tests here
 // run with "npm run test-jest"
 require('./load-all-classes.js');

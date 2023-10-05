@@ -1,3 +1,4 @@
+globalThis.testOn = true;
 // Board tests here
 // run with "npm run test-jest"
 require('./load-all-classes.js');
