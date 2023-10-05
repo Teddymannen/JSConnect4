@@ -115,7 +115,6 @@ class Game {
   }
 
   stopGame() {
-    console.log('stopGame called');
     // set isGameOver to true
     this.gameLogic.isGameOver = true;
   }
@@ -346,7 +345,6 @@ class Game {
       if (saveNameForm) {
         event.preventDefault(); // do not reload web page
 
-        console.log(saveNameForm.elements) // debug
         var player1 = saveNameForm.querySelectorAll('.inputLabel')[0].value;
         var player2 = saveNameForm.querySelectorAll('.inputLabel')[1].value;
 
@@ -388,7 +386,6 @@ class Game {
       if (saveNameFormOnline) {
         event.preventDefault(); // do not reload web page
 
-        console.log(saveNameFormOnline.elements) // debug
         var player = saveNameFormOnline.querySelectorAll('.inputLabel')[0].value;
         var channel = saveNameFormOnline.querySelectorAll('.inputLabel')[1].value;
 
@@ -440,7 +437,6 @@ class Game {
       // not enough players - add
       else {
         this.players.push(playerName);
-        console.log('this.players', this.players);
         // if player.length === 2, change the last player to player2
         if (this.players.length === 2) {
           const self = this.player1;
@@ -485,8 +481,7 @@ class Game {
         }
       }
 
-      console.log(user, data);
-      // Call some method, makeMove?
+      console.log(`User "${user}" made move: ${data}`);
     }
   }
 }

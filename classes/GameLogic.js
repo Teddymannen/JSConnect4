@@ -28,8 +28,8 @@ class GameLogic {
           this.info = `<p class="${pIndex === 0 ? 'redP' : 'yellowP'}">It's ${this.players[pIndex].name}'s turn.</p>`;
         }
       } else {
-        // console.log('Invalid move. Please try again.');
-        this.info = 'Invalid move. Please try again.';
+        console.log('Invalid move. Please try again.');
+        this.info = `<p>Invalid move. Please try again.</p>`;
       }
     }
 
