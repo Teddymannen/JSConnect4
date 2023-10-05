@@ -140,6 +140,11 @@ button {
     background-color: rgb(255, 57, 57);
 }
 
+.last-played {
+    /* background color should go from black to transparent */
+    border: 1px rgb(196, 0, 214) solid !important;
+}
+
 @media (orientation: portrait) {
     .board {
         /* margin-top: calc(50vh - 48vw); */
