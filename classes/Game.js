@@ -444,6 +444,7 @@ class Game {
             this.player1 = new OnlinePlayer(this.players[0], 'X');
             this.player2 = self;
             this.player2.symbol = 'O';
+            this.player2.me = 'O';
           }
           if (this.players[1] !== self.name) {
             this.player2 = new OnlinePlayer(this.players[1], 'O');
