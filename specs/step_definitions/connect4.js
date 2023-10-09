@@ -49,10 +49,6 @@ Then('I should still see the info text {string}', (infoText) => {
   cy.get('div[class="info"] p').contains(infoText);
 });
 
-// When('I click the {string} button', (buttonName) => {
-//   cy.get('button').contains(buttonName).click();
-// });
-
 When('I click on the {string} radio button with {string}', (radioClass, radioName) => {
   // get radio button by class and radio name and click it
   cy.get(`input[class="${radioClass}"][name="${radioName}"]`).click();
