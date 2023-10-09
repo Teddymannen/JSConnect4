@@ -4,6 +4,10 @@ Given('I am on the game page', () => {
   cy.visit('/');
 });
 
+Given('I have clicked on the {string} button', (buttonText) => {
+  cy.get('button').contains(buttonText).click();
+});
+
 Then('I should see {string}', (gameName) => {
   cy.get('body h1[class="mainHeader"]').contains(gameName);
 });
@@ -12,8 +16,8 @@ When('I fill in {string} with {string}', (player, name) => {
   cy.get('input[placeholder="' + player + '"]').type(name);
 });
 
-When('I click the Play button', () => {
-  cy.get('button[type="submit"]').click();
+When('I click the {string} button', (buttonText) => {
+  cy.get('button[type="submit"]').contains(buttonText).click();
 });
 
 Then('I should see the info text {string}', (infoText) => {
@@ -45,9 +49,9 @@ Then('I should still see the info text {string}', (infoText) => {
   cy.get('div[class="info"] p').contains(infoText);
 });
 
-When('I click the {string} button', (buttonName) => {
-  cy.get('button').contains(buttonName).click();
-});
+// When('I click the {string} button', (buttonName) => {
+//   cy.get('button').contains(buttonName).click();
+// });
 
 When('I click on the {string} radio button with {string}', (radioClass, radioName) => {
   // get radio button by class and radio name and click it
