@@ -23,6 +23,7 @@ class Game {
   }
 
   menuRender() {
+    Network.disconnect();
     this.board = new Board(this.board.rows, this.board.columns);
     document.body.innerHTML = /*html*/`
       <h1 class="mainHeader">Connect Four</h1>
@@ -46,6 +47,7 @@ class Game {
   }
 
   offlineRender() {
+    Network.disconnect();
     this.board = new Board(this.board.rows, this.board.columns);
     document.body.innerHTML = /*html*/`
       <h1 class="mainHeader">Connect Four - Offline</h1>
