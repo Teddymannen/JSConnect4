@@ -92,7 +92,6 @@ class HardBot {
     });
     // is 'this.symbol' the same as 'this.game.currentPlayer'?
     if (this.me !== me || this.me !== (this.symbol)) {
-      console.log('debug2')
       return (pm[0] || { score: 0 }).score;
     }
     console.log(pm)
